@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Calendar, { CalendarProps } from "react-calendar";
-import "react-calendar/dist/Calendar.css"; 
 import "./Calendar.css";
 
 const CalendarPage: React.FC = () => {
@@ -12,7 +11,7 @@ const CalendarPage: React.FC = () => {
     if (newDate instanceof Date) {
       setDate(newDate);
     } else {
-      console.error('Invalid date value:', newDate);
+      console.error("Invalid date value:", newDate);
     }
   };
 
@@ -27,7 +26,7 @@ const CalendarPage: React.FC = () => {
   };
 
   return (
-    <div style={{ margin: "50px auto", maxWidth: "600px", textAlign: "center" }}>
+    <div className="calendar-container">
       <h1>Previous Images</h1>
       <Calendar onChange={onChange} value={date} onClickDay={onDateClick} />
       <p>Selected Date: {date.toDateString()}</p>
@@ -36,9 +35,11 @@ const CalendarPage: React.FC = () => {
       {isModalOpen && selectedDate && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h2>Date Selected</h2>
-            <p>{selectedDate.toDateString()}</p>
-            <button onClick={closeModal}>Close</button>
+            <h1>TODO: REPLACE WITH PICTURE</h1>
+            <div className="bottom-content">
+              <p>{selectedDate.toDateString()}</p>
+              <button onClick={closeModal}>Close</button>
+            </div>
           </div>
         </div>
       )}
