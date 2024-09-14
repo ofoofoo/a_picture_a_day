@@ -1,0 +1,60 @@
+/* Styling for the entire app */
+.upload {
+  background-color: #000;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Arial", sans-serif;
+}
+
+/* Styling for the prompt box */
+.prompt-box {
+  background-color: #111;
+  padding: 20px 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+  margin-bottom: 30px;
+}
+
+.prompt-box h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  text-align: center;
+  color: #fff;
+}
+
+/* Styling for the upload box */
+.upload-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Styling for the custom file upload button */
+.custom-file-upload {
+  background-color: #444;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+  background-color: #666;
+}
+
+/* Hiding the default file input */
+#file-upload {
+  display: none;
+}
+
+/* File name display */
+p {
+  margin-top: 10px;
+  color: #aaa;
+}

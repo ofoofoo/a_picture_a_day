@@ -1,6 +1,10 @@
 {
   "dependencies": {
+<<<<<<< HEAD
     "@reach/router": "^1.3.4",
     "react-router-dom": "^6.26.2"
+=======
+    "lucide-react": "^0.441.0"
+>>>>>>> fd43b0d (added upload may not work)
   }
 }
