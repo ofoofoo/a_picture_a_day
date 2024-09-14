@@ -1,22 +1,21 @@
 import React, { useState } from "react";
 import Calendar, { CalendarProps } from "react-calendar";
-import "react-calendar/dist/Calendar.css";
-
+import "react-calendar/dist/Calendar.css"; 
 import "./Calendar.css";
 
 const CalendarPage: React.FC = () => {
-  const [date, setDate] = useState<Date>(new Date()); 
+  const [date, setDate] = useState<Date>(new Date()); // current date
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null); 
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null); // stores clicked data
 
   const onChange: CalendarProps["onChange"] = (newDate, event) => {
-    if (newDate === null) {
-      return;
-    }
-    if (Array.isArray(newDate)) {
+    if (newDate instanceof Date) {
+      setDate(newDate);
+    } else if (Array.isArray(newDate) && newDate[0] instanceof Date) {
       setDate(newDate[0]);
     } else {
-      setDate(newDate);
+      // Handle null or unexpected value
+      console.error('Invalid date value:', newDate);
     }
   };
 
