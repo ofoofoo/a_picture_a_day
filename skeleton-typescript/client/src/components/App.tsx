@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { CredentialResponse } from "@react-oauth/google";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
 import { get, post } from "../utilities";
 import NotFound from "./pages/NotFound";
@@ -40,6 +40,8 @@ const App = () => {
     post("/api/logout");
   };
 
+  const uploaded = true;
+
   // NOTE:
   // All the pages need to have the props extended via RouteComponentProps for @reach/router to work properly. Please use the Skeleton as an example.
 
@@ -50,14 +52,19 @@ const App = () => {
 
         <Routes>
           <Route path="*" element={<NotFound />} />
-          <Route path="/" element={<Upload />} />
-          <Route path="/vote" element={<Vote />} />
-<<<<<<< HEAD
+          <Route
+            path="/"
+            element={uploaded ? <Navigate to="/vote" /> : <Navigate to="/upload" />}
+          />
+          <Route path="/upload" element={uploaded ? <Navigate to="/vote" /> : <Upload />} />
+          <Route
+            path="/profile"
+            element={
+              <ProfilePage userId={userId} handleLogin={handleLogin} handleLogout={handleLogout} />
+            }
+          />
+          <Route path="/vote" element={uploaded ? <Vote /> : <Navigate to="/upload" />} />
           <Route path="/calendar" element={<CalendarPage />} />
-||||||| 2a998d7
-=======
-          <Route path="/profile" element={<ProfilePage userId={userId} handleLogin={handleLogin} handleLogout={handleLogout} />} />
->>>>>>> refs/remotes/origin/main
         </Routes>
       </BrowserRouter>
     </>
