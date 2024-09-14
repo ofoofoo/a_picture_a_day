@@ -105,7 +105,7 @@ router.post("/upload", upload.single('file'), async (req, res) => {
   }
 });
 
-router.post("/vote", async (req, res) => {
+router.post("/add-vote", async (req, res) => {
   const userId = req.user?._id;
   const imageId = req.body.imageId;
 
@@ -136,8 +136,6 @@ router.post("/vote", async (req, res) => {
   });
 });
 
-// maybe need unvote route?
-
 router.get("/get-images", async (req, res) => {
   try {
     const dateString = req.query.date as string;
@@ -157,9 +155,22 @@ router.get("/get-images", async (req, res) => {
       },
     });
 
+    const imagesWithSignedUrl = images.map((image) => {
+      const params = {
+        Bucket: process.env.S3_BUCKET_NAME as string,
+        Key: image.filekey,
+        Expires: 7200,
+      };
+      const signedUrl = s3.getSignedUrl("getObject", params);
+      return {
+        ...image.toObject(),
+        signedUrl,
+      };
+    });
+
     res.status(200).json({
       success: true,
-      images,
+      imagesWithSignedUrl,
     });
   } catch (error) {
     console.error('Failed to retrieve images:', error);
