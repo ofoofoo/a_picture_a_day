@@ -12,6 +12,7 @@ import Upload from "./pages/Upload";
 import NavBar from "./pages/NavBar.tsx";
 import ProfilePage from "./pages/ProfilePage";
 import Vote from "./pages/Vote.tsx";
+import CalendarPage from "./pages/Calendar";
 
 const App = () => {
   const [userId, setUserId] = useState<string | undefined>(undefined);
@@ -52,6 +53,7 @@ const App = () => {
           <Route path="/" element={<Upload />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/vote" element={<Vote />} />
+          <Route path="/calendar" element={<CalendarPage />} />
         </Routes>
       </BrowserRouter>
     </>
