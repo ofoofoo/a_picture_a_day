@@ -45,14 +45,14 @@ const App = () => {
       <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       <BrowserRouter>
         <Routes>
-          <Route
+          {/* <Route
             element={
               <Skeleton handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
             }
             path="/"
-          />
+          /> */}
           <Route path="*" element={<NotFound />} />
-          <Route path="/upload" element={<Upload />} />
+          <Route path="/" element={<Upload />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -16,7 +16,7 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
   return (
     <nav className="NavBar-container">
       <div className="NavBar-title u-inlineBlock">
-        <Link to="/banana" className="NavBar-title">
+        <Link to="/" className="NavBar-title">
           <span className="gradient1-text">A Pic A Day</span>
         </Link>
       </div>
