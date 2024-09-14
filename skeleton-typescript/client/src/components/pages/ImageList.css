@@ -84,8 +84,16 @@
 }
 
 .modal-content {
+  /* Ensure image maintains its original aspect ratio */
+  width: auto;
+  height: auto;
+
+  /* Scale down image if it exceeds the viewport while maintaining aspect ratio */
   max-width: 90%;
   max-height: 90%;
+
+  /* Ensure the image fits proportionally inside its container */
+  object-fit: contain;
 }
 
 .close {
