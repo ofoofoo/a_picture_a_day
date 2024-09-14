@@ -48,7 +48,7 @@ const GOOGLE_CLIENT_ID =
               Logout
             </button>
           ) : (
-            <GoogleLogin onSuccess={handleLogin} onError={(err) => console.error(err)} />
+            <GoogleLogin onSuccess={handleLogin} />
           )}
         </GoogleOAuthProvider>
   
