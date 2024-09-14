@@ -10,7 +10,11 @@ import User from "../../../shared/User";
 import "../utilities.css";
 import Upload from "./pages/Upload";
 import NavBar from "./pages/NavBar.tsx";
+<<<<<<< HEAD
 import ProfilePage from "./pages/ProfilePage";
+=======
+import Vote from "./pages/Vote.tsx";
+>>>>>>> 8e6366a (list of images working in vote)
 
 const App = () => {
   const [userId, setUserId] = useState<string | undefined>(undefined);
@@ -47,15 +51,13 @@ const App = () => {
         <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
 
         <Routes>
-          <Route
-            element={
-              <Skeleton handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
-            }
-            path="/"
-          />
           <Route path="*" element={<NotFound />} />
           <Route path="/" element={<Upload />} />
+<<<<<<< HEAD
           <Route path="/profile" element={<ProfilePage />} />
+=======
+          <Route path="/vote" element={<Vote />} />
+>>>>>>> 8e6366a (list of images working in vote)
         </Routes>
       </BrowserRouter>
     </>
