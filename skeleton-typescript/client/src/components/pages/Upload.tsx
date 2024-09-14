@@ -38,7 +38,9 @@ const Upload = ({ changedUploaded, userId }) => {
       </div>
       <>
         {userId === undefined ? (
-          <></>
+          <>
+            <p>Log in to upload!</p>
+          </>
         ) : (
           <div className="upload-box">
             <label htmlFor="file-upload" className="custom-file-upload">
