@@ -11,12 +11,6 @@ router.get("/whoami", (req, res) => {
   }
   res.send(req.user);
 });
-router.post("/initsocket", (req, res) => {
-  // do nothing if user not logged in
-  if (req.user) {
-  }
-  res.send({});
-});
 
 // |------------------------------|
 // | write your API methods below!|
