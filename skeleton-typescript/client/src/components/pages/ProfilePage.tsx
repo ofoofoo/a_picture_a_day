@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './ProfilePage.css';
-import { Link } from '@reach/router';
+import { Link } from "react-router-dom";
 import {
   GoogleOAuthProvider,
   GoogleLogin,
