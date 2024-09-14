@@ -1,5 +1,7 @@
 import React from "react";
-// import { Link } from "@reach/router";
+import { Link } from "@reach/router";
+// import { Link } from "react-router-dom";
+
 import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
 
 import "./NavBar.css";
@@ -13,7 +15,9 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
   return (
     <nav className="NavBar-container">
       <div className="NavBar-title u-inlineBlock">
-        <span className="gradient1-text">A Pic A Day</span>
+        <Link to="/banana" className="NavBar-title">
+          <span className="gradient1-text">A Pic A Day</span>
+        </Link>
       </div>
       <div className="NavBar-linkContainer u-inlineBlock">
         <span className="NavBar-link NavBar-loginbutton">
