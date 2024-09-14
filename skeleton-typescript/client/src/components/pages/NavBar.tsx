@@ -6,7 +6,8 @@ import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/goo
 
 import "./NavBar.css";
 
-const GOOGLE_CLIENT_ID = "204415935913-be7cesbef5i942rtjct5j2fs71rvd7d0.apps.googleusercontent.com";
+const GOOGLE_CLIENT_ID =
+  "1058809634774-q5fa4vukq4cll8kc5pu6lv9emvui3bg2.apps.googleusercontent.com";
 
 /**
  * The navigation bar at the top of all pages. Takes no props.
@@ -21,7 +22,7 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
       </div>
       <div className="NavBar-linkContainer u-inlineBlock">
         <Link to="/calendar" className="NavBar-link, NavBar-calendar">
-            <FaCalendarAlt size={24} /> {/* Calendar icon */}
+          <FaCalendarAlt size={24} /> {/* Calendar icon */}
         </Link>
         <span className="NavBar-link NavBar-loginbutton">
           <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
@@ -36,7 +37,7 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
                 Logout
               </button>
             ) : (
-              <GoogleLogin onSuccess={handleLogin}/>
+              <GoogleLogin onSuccess={handleLogin} />
             )}
           </GoogleOAuthProvider>
         </span>
