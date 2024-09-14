@@ -12,14 +12,14 @@ import "../utilities.css";
 const App = () => {
   const [userId, setUserId] = useState<string | undefined>(undefined);
 
-  useEffect(() => {
-    get("/api/whoami").then((user: User) => {
-      if (user._id) {
-        // TRhey are registed in the database and currently logged in.
-        setUserId(user._id);
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   get("/api/whoami").then((user: User) => {
+  //     if (user._id) {
+  //       // TRhey are registed in the database and currently logged in.
+  //       setUserId(user._id);
+  //     }
+  //   });
+  // }, []);
 
   const handleLogin = (credentialResponse: CredentialResponse) => {
     const userToken = credentialResponse.credential;
