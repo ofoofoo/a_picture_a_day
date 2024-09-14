@@ -69,7 +69,7 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+        <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} loggedIn={loggedIn} />
 
         <Routes>
           <Route path="*" element={<NotFound />} />
@@ -77,6 +77,11 @@ const App = () => {
             path="/"
             element={uploaded ? <Navigate to="/vote" /> : <Navigate to="/upload" />}
           />
+          <Route
+            path="/calendar"
+            element={loggedIn ? <CalendarPage /> : <Navigate to="/" />}
+          />
+
           <Route
             path="/upload"
             element={
