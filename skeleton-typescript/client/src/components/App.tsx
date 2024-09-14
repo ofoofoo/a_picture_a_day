@@ -47,15 +47,15 @@ const App = () => {
         <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
 
         <Routes>
-          {/* <Route
+          <Route
             element={
               <Skeleton handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
             }
             path="/"
-          /> */}
+          />
           <Route path="*" element={<NotFound />} />
           <Route path="/" element={<Upload />} />
-          <Route path="/profile" element={<ProfilePage/>} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </BrowserRouter>
     </>
