@@ -114,30 +114,7 @@ const App = () => {
               )
             }
           />
-          {/* <Route
-            path="/profile"
-            element={
-              <ProfilePage
-                userId={userId}
-                handleLogin={handleLogin}
-                handleLogout={handleLogout}
-                userPhoto={userPhoto}
-              />
-            }
-          /> */}
           <Route path="/vote" element={uploaded ? <Vote /> : <Navigate to="/upload" />} />
-          {/* <Route path="/calendar" element={<CalendarPage />} /> */}
-          {/* <Route
-            path="/profile"
-            element={
-              <ProfilePage
-                userId={userId}
-                handleLogin={handleLogin}
-                handleLogout={handleLogout}
-                userPhoto={userPhoto}
-              />
-            }
-          /> */}
         </Routes>
       </BrowserRouter>
     </>
