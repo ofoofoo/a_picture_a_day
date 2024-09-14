@@ -8,7 +8,7 @@ import NotFound from "./pages/NotFound";
 import Skeleton from "./pages/Skeleton";
 import User from "../../../shared/User";
 import "../utilities.css";
-
+import Upload from "./pages/Upload";
 import NavBar from "./pages/NavBar.tsx";
 
 const App = () => {
@@ -39,21 +39,22 @@ const App = () => {
 
   // NOTE:
   // All the pages need to have the props extended via RouteComponentProps for @reach/router to work properly. Please use the Skeleton as an example.
-  
+
   return (
     <>
-    <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
-    <BrowserRouter>
-      <Routes>
-        <Route
-          element={
-            <Skeleton handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
-          }
-          path="/"
-        />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+      <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            element={
+              <Skeleton handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+            }
+            path="/"
+          />
+          <Route path="*" element={<NotFound />} />
+          <Route path="/upload" element={<Upload />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 };
