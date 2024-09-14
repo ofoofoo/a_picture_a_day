@@ -11,10 +11,7 @@ const CalendarPage: React.FC = () => {
   const onChange: CalendarProps["onChange"] = (newDate, event) => {
     if (newDate instanceof Date) {
       setDate(newDate);
-    } else if (Array.isArray(newDate) && newDate[0] instanceof Date) {
-      setDate(newDate[0]);
     } else {
-      // Handle null or unexpected value
       console.error('Invalid date value:', newDate);
     }
   };
@@ -31,7 +28,7 @@ const CalendarPage: React.FC = () => {
 
   return (
     <div style={{ margin: "50px auto", maxWidth: "600px", textAlign: "center" }}>
-      <h1>My Calendar Page</h1>
+      <h1>Previous Images</h1>
       <Calendar onChange={onChange} value={date} onClickDay={onDateClick} />
       <p>Selected Date: {date.toDateString()}</p>
 
