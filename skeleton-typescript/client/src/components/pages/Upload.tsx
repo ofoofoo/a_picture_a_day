@@ -4,18 +4,26 @@ import "./Upload.css";
 const Upload: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files ? event.target.files[0] : null;
     setSelectedFile(file);
 
     if (file) {
-      // Call your API here with the selected file
       console.log("Uploaded file:", file);
 
-      // You can make an API call like:
-      // const formData = new FormData();
-      // formData.append('image', file);
-      // fetch('YOUR_API_ENDPOINT', { method: 'POST', body: formData });
+      const formData = new FormData();
+      formData.append('file', file);
+      try {
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const result = await res.json();
+        console.log(result);
+      } catch (error) {
+        console.error('Failed to upload image:', error);
+      }
     }
   };
 
