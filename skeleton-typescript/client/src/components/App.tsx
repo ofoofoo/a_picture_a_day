@@ -101,6 +101,7 @@ const App = () => {
                   handleLogin={handleLogin}
                   handleLogout={handleLogout}
                   userPhoto={userPhoto}
+                  changedUploaded={changedUploaded}
                 />
               ) : (
                 <Navigate to="/upload" />

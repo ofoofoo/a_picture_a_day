@@ -15,6 +15,7 @@ interface ProfilePageProps {
   handleLogin: (credentialResponse: CredentialResponse) => void;
   handleLogout: () => void;
   userPhoto?: string;
+  changedUploaded: (boolean) => void;
 }
 
 const GOOGLE_CLIENT_ID =
@@ -25,6 +26,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
   handleLogin,
   handleLogout,
   userPhoto,
+  changedUploaded,
 }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
@@ -63,6 +65,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
               className="logout-button"
               onClick={() => {
                 googleLogout();
+                changedUploaded(false);
                 handleLogout();
               }}
             >
