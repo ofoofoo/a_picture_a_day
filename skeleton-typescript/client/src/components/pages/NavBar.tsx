@@ -14,7 +14,7 @@ const GOOGLE_CLIENT_ID =
 /**
  * The navigation bar at the top of all pages. Takes no props.
  */
-const NavBar = ({ userId, handleLogin, handleLogout }) => {
+const NavBar = ({ userId, handleLogin, handleLogout, userPhoto }) => {
   useEffect(() => {
     // Add any logic here that needs to run when the component mounts or the route changes
     console.log("Profile page loaded or navigated back to.");
@@ -45,6 +45,7 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
               //   Logout
               // </button>
               <Link to="/profile" className="NavBar-link">
+                <img src={userPhoto} />
                 Profile
               </Link>
             ) : (

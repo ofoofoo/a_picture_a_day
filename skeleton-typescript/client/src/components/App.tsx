@@ -15,6 +15,7 @@ import CalendarPage from "./pages/Calendar";
 
 const App = () => {
   const [userId, setUserId] = useState<string | undefined>(undefined);
+  const [userPhoto, setUserPhoto] = useState<string | undefined>(undefined);
   const [loggedIn, changeLog] = useState(false);
   const isMounted = useRef(false);
   useEffect(() => {
@@ -22,6 +23,7 @@ const App = () => {
       if (user._id) {
         // TRhey are registed in the database and currently logged in.
         setUserId(user._id);
+        setUserPhoto(user.photoUrl);
         // changeLog(true);
       }
     });
@@ -36,12 +38,14 @@ const App = () => {
     console.log(`Logged in as ${decodedCredential.name}`);
     post("/api/login", { token: userToken }).then((user) => {
       setUserId(user._id);
+      setUserPhoto(user.photoUrl);
       changeLog(true);
     });
   };
 
   const handleLogout = () => {
     setUserId(undefined);
+    setUserPhoto(undefined);
     post("/api/logout");
     changeLog(false);
   };
@@ -65,7 +69,12 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+        <NavBar
+          handleLogin={handleLogin}
+          handleLogout={handleLogout}
+          userId={userId}
+          userPhoto={userPhoto}
+        />
 
         <Routes>
           <Route path="*" element={<NotFound />} />
@@ -86,7 +95,12 @@ const App = () => {
           <Route
             path="/profile"
             element={
-              <ProfilePage userId={userId} handleLogin={handleLogin} handleLogout={handleLogout} />
+              <ProfilePage
+                userId={userId}
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+                userPhoto={userPhoto}
+              />
             }
           />
           <Route path="/vote" element={uploaded ? <Vote /> : <Navigate to="/upload" />} />
@@ -95,7 +109,12 @@ const App = () => {
           <Route
             path="/profile"
             element={
-              <ProfilePage userId={userId} handleLogin={handleLogin} handleLogout={handleLogout} />
+              <ProfilePage
+                userId={userId}
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+                userPhoto={userPhoto}
+              />
             }
           />
         </Routes>
