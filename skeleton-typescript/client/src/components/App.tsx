@@ -24,7 +24,7 @@ const App = () => {
         // TRhey are registed in the database and currently logged in.
         setUserId(user._id);
         setUserPhoto(user.photoUrl);
-        // changeLog(true);
+        changeLog(true);
       }
     });
   }, []);
@@ -53,10 +53,14 @@ const App = () => {
   //set uploaded
   useEffect(() => {
     console.log(loggedIn);
-    if (!isMounted.current) {
-      isMounted.current = true;
+    // if (!isMounted.current) {
+    //   isMounted.current = true;
+    //   return;
+    // }
+    if (userId === undefined) {
       return;
     }
+    console.log("hello");
     get("/api/getuploaded").then((user) => {
       if (user.upload) {
         changedUploaded(true);
@@ -74,6 +78,7 @@ const App = () => {
           handleLogout={handleLogout}
           userId={userId}
           userPhoto={userPhoto}
+          loggedIn={loggedIn}
         />
 
         <Routes>
@@ -82,6 +87,8 @@ const App = () => {
             path="/"
             element={uploaded ? <Navigate to="/vote" /> : <Navigate to="/upload" />}
           />
+          <Route path="/calendar" element={loggedIn ? <CalendarPage /> : <Navigate to="/" />} />
+
           <Route
             path="/upload"
             element={
@@ -105,7 +112,6 @@ const App = () => {
           />
           <Route path="/vote" element={uploaded ? <Vote /> : <Navigate to="/upload" />} />
           <Route path="/calendar" element={<CalendarPage />} />
-          <Route path="/" element={<Upload changedUploaded={changedUploaded} userId={userId} />} />
           <Route
             path="/profile"
             element={

@@ -14,7 +14,7 @@ const GOOGLE_CLIENT_ID =
 /**
  * The navigation bar at the top of all pages. Takes no props.
  */
-const NavBar = ({ userId, handleLogin, handleLogout, userPhoto }) => {
+const NavBar = ({ userId, handleLogin, handleLogout, userPhoto, loggedIn }) => {
   useEffect(() => {
     // Add any logic here that needs to run when the component mounts or the route changes
     console.log("Profile page loaded or navigated back to.");
@@ -29,9 +29,11 @@ const NavBar = ({ userId, handleLogin, handleLogout, userPhoto }) => {
         </Link>
       </div>
       <div className="NavBar-linkContainer u-inlineBlock">
-        <Link to="/calendar" className="NavBar-link, NavBar-calendar">
-          <FaCalendarAlt size={24} /> {/* Calendar icon */}
-        </Link>
+        {loggedIn && (
+          <Link to="/calendar" className="NavBar-link, NavBar-calendar">
+            <FaCalendarAlt size={24} /> {/* Calendar icon */}
+          </Link>
+        )}
         <span className="NavBar-link NavBar-loginbutton">
           <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
             {userId ? (
