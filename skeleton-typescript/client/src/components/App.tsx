@@ -91,7 +91,6 @@ const App = () => {
           />
           <Route path="/vote" element={uploaded ? <Vote /> : <Navigate to="/upload" />} />
           <Route path="/calendar" element={<CalendarPage />} />
-          <Route path="/" element={<Upload changedUploaded={changedUploaded} userId={userId} />} />
           <Route
             path="/profile"
             element={
