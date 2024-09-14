@@ -44,7 +44,10 @@ router.get("/userinfo", async (req, res) => {
     }
 
     const uploadedImage = ImageModel.findById(user.uploaded);
+
     const votingForImage = ImageModel.findById(user.votingFor);
+
+    console.log("hullo dumbass");
     res.status(200).json({
       success: true,
       _id: user._id,
@@ -60,6 +63,37 @@ router.get("/userinfo", async (req, res) => {
   }
 });
 
+router.get("/getuploaded", async (req, res) => {
+  try {
+    const userId = req.user?._id;
+    if (!userId) {
+      return res.status(401).send("Not logged in.");
+    }
+
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return res.status(404).send("User not found.");
+    }
+
+    const uploadedImage = ImageModel.findById(user.uploaded);
+    let upload = true;
+    if (uploadedImage === null) {
+      upload = false;
+    }
+
+    res.status(200).json({
+      success: true,
+      _id: user._id,
+      name: user.name,
+      upload: upload,
+    });
+  } catch (error) {
+    console.error("Failed to retrieve user info:", error);
+    res.status(500).json({
+      success: false,
+    });
+  }
+});
 router.post("/upload", upload.single("file"), async (req, res) => {
   const file = req.file;
   const userId = req.user?._id;

@@ -30,18 +30,29 @@ body {
     margin-bottom: 20px;
   }
   .view-button {
-    background-color: gray;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
+    padding: 10px 20px;
+    border-radius: 25px; /* Make the button rounded */
+    background-color: rgba(255, 255, 255, 0.3); /* Translucent background */
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Semi-transparent border */
+    color: #fff; /* White text */
+    font-size: 16px;
     cursor: pointer;
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   }
   
   .view-button:hover {
-    background-color: #444;
+    background-color: rgba(255, 255, 255, 0.5); /* Slightly less translucent on hover */
+    color: #000; /* Change text color to black on hover */
+    border: 2px solid rgba(255, 255, 255, 0.8); /* Darker border on hover */
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Bigger shadow for the pop-out effect */
   }
-
+  
+  .view-button:focus {
+    outline: none; /* Remove default focus outline */
+  }
+  
   /* Styling for the entire app */
 .upload {
   background-color: #000;
@@ -103,4 +114,26 @@ p {
   color: #aaa;
 }
 
+.logout-button {
+  padding: 10px 50px;
+  border-radius: 5px; /* Make the button rounded */
+  background-color: rgba(101, 88, 88, 0.3); /* Translucent background */
+  border: 2px solid rgba(104, 81, 81, 0.5); /* Semi-transparent border */
+  color: #e42b2b; /* White text */
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth transition for hover effect */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.logout-button:hover {
+  background-color: rgba(255, 255, 255, 0.5); /* Slightly less translucent on hover */
+  color: #000; /* Change text color to black on hover */
+  border: 2px solid rgba(72, 31, 31, 0.8); /* Darker border on hover */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Bigger shadow for the pop-out effect */
+}
+
+.logout-button:focus {
+  outline: none; /* Remove default focus outline */
+}
   

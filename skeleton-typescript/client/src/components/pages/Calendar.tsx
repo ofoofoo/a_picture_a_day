@@ -35,7 +35,17 @@ const CalendarPage: React.FC = () => {
       {isModalOpen && selectedDate && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h1>TODO: REPLACE WITH PICTURE</h1>
+            <h1>Images for {selectedDate.toDateString()}</h1>
+            <div className="image-container">
+              <div className="image-wrapper">
+                image 1 here
+                <img src="path-to-image-1" alt="Image 1" />
+              </div>
+              <div className="image-wrapper">
+                iamge 2 here
+                <img src="path-to-image-2" alt="Image 2" />
+              </div>
+            </div>
             <div className="bottom-content">
               <p>{selectedDate.toDateString()}</p>
               <button onClick={closeModal}>Close</button>
