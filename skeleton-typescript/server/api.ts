@@ -75,9 +75,12 @@ router.get("/getuploaded", async (req, res) => {
       return res.status(404).send("User not found.");
     }
 
-    const uploadedImage = ImageModel.findById(user.uploaded);
+    // const uploadedImage = ImageModel.findById(user.uploaded);
     let upload = true;
-    if (uploadedImage === null) {
+    console.log("upladeded image in inininin");
+    console.log(user.uploaded);
+    if (user.uploaded === null) {
+      console.log("hi it went into this");
       upload = false;
     }
 

@@ -60,8 +60,11 @@ const App = () => {
     if (userId === undefined) {
       return;
     }
-    console.log("hello");
+    console.log("uploaded");
+    console.log(uploaded);
     get("/api/getuploaded").then((user) => {
+      console.log("hawk dhjshjs");
+      console.log(user.upload);
       if (user.upload) {
         changedUploaded(true);
       }
@@ -100,7 +103,7 @@ const App = () => {
                   userPhoto={userPhoto}
                 />
               ) : (
-                <Navigate to="/" />
+                <Navigate to="/upload" />
               )
             }
           />
