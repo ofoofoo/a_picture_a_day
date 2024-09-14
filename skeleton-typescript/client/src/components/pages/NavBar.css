@@ -1,11 +1,12 @@
 .NavBar-container {
   padding: var(--l) var(--l);
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
   background: rgba(125, 134, 139, 0.65);
-  align-items: center; /* Vertically align items */
-  width: 100vw;
+  width: 100%;
   z-index: 100;
-  height: 32px;
-  top: 0;
+  height: 60px;
 
   /* background: linear-gradient(
           90deg,  
@@ -17,57 +18,64 @@
 
 .NavBar-title {
   color: var(--white);
-  font-size: 20px;
-  font-family: "Mulish";
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 35px;
 }
 
 .NavBar-linkContainer {
+  display: flex;
   align-items: center; /* Vertically align items */
-
-  margin-left: var(--l);
 }
 
 .NavBar-calendar {
-  font-size: 24px;
-  color: #000;
+  display: flex;
+  align-items: center; /* Vertically align items */
+  color: #ccc;
 }
 
 .NavBar-calendar:hover {
-  color: #ccc;
+  color: #000;
 }
 
 .NavBar-link,
 .NavBar-link:visited {
   color: var(--white);
   opacity: 0.8;
-  font-size: 20px;
   text-decoration: none;
   font-weight: bold;
 }
 
 .NavBar-link:hover {
   opacity: 1;
-  font-size: 20px;
 }
 
 .NavBar-link + .NavBar-link {
   margin-left: var(--m);
 }
 
-.NavBar-loginbutton {
+.NavBar-photo {
+  margin-left: var(--l);
+  margin-left: var(--l);
+  display: flex;
   align-items: center; /* Vertically align items */
-
-  position: absolute;
-  top: 16px;
-  right: 25px;
-  margin-right: 48px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-body {
+.NavBar-right-align {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+/* body {
   font-family: Inter;
-}
+} */
 
-.button-54 {
+/* .button-54 {
   font-family: "Roboto", sans-serif;
   font-size: 11px;
   letter-spacing: 2px;
@@ -93,20 +101,10 @@ body {
   box-shadow: 0px 0px 0px 0px;
   top: 5px;
   left: 5px;
-}
+} */
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   .button-54 {
     padding: 0.25em 0.75em;
   }
-}
-.gradient1-text {
-  margin-top: 96px;
-  font-family: "Mulish";
-  text-align: center;
-  font-size: 30px; /* Adjust the font size */
-  background: linear-gradient(45deg, #07e6f6, #a212d6); /* Define your gradient colors and angle */
-  -webkit-background-clip: text; /* Clip the gradient to the text */
-  background-clip: text;
-  font-weight: bold;
-}
+} */

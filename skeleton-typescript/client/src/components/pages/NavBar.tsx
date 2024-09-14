@@ -28,33 +28,21 @@ const NavBar = ({ userId, handleLogin, handleLogout, userPhoto, loggedIn }) => {
           <span className="gradient1-text">A Pic A Day</span>
         </Link>
       </div>
-      <div className="NavBar-linkContainer u-inlineBlock">
+      <div className="NavBar-container, NavBar-right-align">
         {loggedIn && (
           <Link to="/calendar" className="NavBar-link, NavBar-calendar">
-            <FaCalendarAlt size={24} /> {/* Calendar icon */}
+            <FaCalendarAlt size={30} /> {/* Calendar icon */}
           </Link>
         )}
-        <span className="NavBar-link NavBar-loginbutton">
-          <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-            {userId ? (
-              // <button
-              //   className="button-54"
-              //   onClick={() => {
-              //     googleLogout();
-              //     handleLogout();
-              //   }}
-              // >
-              //   Logout
-              // </button>
-              <Link to="/profile" className="NavBar-link">
-                <img src={userPhoto} />
-                Profile
-              </Link>
-            ) : (
-              <GoogleLogin onSuccess={handleLogin} />
-            )}
-          </GoogleOAuthProvider>
-        </span>
+        <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+          {userId ? (
+            <Link to="/profile" className="NavBar-link">
+              <img src={userPhoto} className="NavBar-photo" />
+            </Link>
+          ) : (
+            <GoogleLogin onSuccess={handleLogin} />
+          )}
+        </GoogleOAuthProvider>
       </div>
     </nav>
   );

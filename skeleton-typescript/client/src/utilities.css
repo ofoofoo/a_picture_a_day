@@ -31,6 +31,11 @@
   --l: 24px;
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Sarala:wght@400;700&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
+* {
+  font-family: "Sarala", sans-serif;
+}
+
 body {
   margin: 0;
   padding: 0;
