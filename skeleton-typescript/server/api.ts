@@ -6,6 +6,7 @@ import express from "express";
 import auth from "./auth";
 import ImageModel from "./models/Image";
 import UserModel from "./models/User";
+import { startOfDay, endOfDay } from "date-fns";
 dotenv.config({});
 
 const router = express.Router();
@@ -30,10 +31,33 @@ router.get("/whoami", (req, res) => {
 // |------------------------------|
 // | write your API methods below!|
 // |------------------------------|
-router.get("/userinfo", (req, res) => {
+router.get("/userinfo", async (req, res) => {
   try {
-    const userId = req.query.userId;
-  } catch (error) { }
+    const userId = req.user?._id;
+    if (!userId) {
+      return res.status(401).send("Not logged in.");
+    }
+
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return res.status(404).send("User not found.");
+    }
+
+    const uploadedImage = ImageModel.findById(user.uploaded);
+    const votingForImage = ImageModel.findById(user.votingFor);
+    res.status(200).json({
+      success: true,
+      _id: user._id,
+      name: user.name,
+      uploaded: uploadedImage,
+      votingFor: votingForImage,
+    });
+  } catch (error) {
+    console.error('Failed to retrieve user info:', error);
+    res.status(500).json({
+      success: false,
+    });
+  }
 });
 
 router.post("/upload", upload.single('file'), async (req, res) => {
@@ -81,7 +105,69 @@ router.post("/upload", upload.single('file'), async (req, res) => {
   }
 });
 
-router.post("/vote");
+router.post("/vote", async (req, res) => {
+  const userId = req.user?._id;
+  const imageId = req.body.imageId;
+
+  const user = await UserModel.findById(userId);
+  if (!user) {
+    return res.status(404).send("User not found.");
+  }
+
+  const image = await ImageModel.findById(imageId);
+  if (!image) {
+    return res.status(404).send("Image not found.");
+  }
+
+  if (user.votingFor !== null) {
+    const oldVotedImage = await ImageModel.findById(user.votingFor);
+    if (oldVotedImage) {
+      oldVotedImage.votes -= 1;
+      await oldVotedImage.save();
+    }
+  }
+  image.votes += 1;
+  await image.save();
+  user.votingFor = imageId;
+  await user.save();
+
+  res.status(200).json({
+    success: true,
+  });
+});
+
+// maybe need unvote route?
+
+router.get("/get-images", async (req, res) => {
+  try {
+    const dateString = req.query.date as string;
+    const date = new Date(dateString);
+
+    if (isNaN(date.getTime())) {
+      return res.status(400).send("Invalid date.");
+    }
+
+    const start = startOfDay(date);
+    const end = endOfDay(date);
+
+    const images = await ImageModel.find({
+      uploadedAt: {
+        $gte: start,
+        $lt: end,
+      },
+    });
+
+    res.status(200).json({
+      success: true,
+      images,
+    });
+  } catch (error) {
+    console.error('Failed to retrieve images:', error);
+    res.status(500).json({
+      success: false,
+    });
+  }
+});
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
