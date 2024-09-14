@@ -1,6 +1,9 @@
-import React from "react";
-import { Link } from "@reach/router";
+import React, {useEffect} from "react";
+// import { Link } from "@reach/router";
 import { FaCalendarAlt } from "react-icons/fa"; // Importing the calendar icon
+import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+
 
 import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
 
@@ -13,11 +16,17 @@ const GOOGLE_CLIENT_ID =
  * The navigation bar at the top of all pages. Takes no props.
  */
 const NavBar = ({ userId, handleLogin, handleLogout }) => {
+    useEffect(() => {
+        // Add any logic here that needs to run when the component mounts or the route changes
+        console.log("Profile page loaded or navigated back to.");
+        // You can also load fresh data here if necessary
+      }, []); // The empty array ensures this effect only runs on mount/unmount or when you navigate back
+    
   return (
     <nav className="NavBar-container">
       <div className="NavBar-title u-inlineBlock">
         <Link to="/" className="NavBar-title">
-          <span className="gradient1-text">A Pic A Day</span>
+        <span className="gradient1-text">A Pic A Day</span>
         </Link>
       </div>
       <div className="NavBar-linkContainer u-inlineBlock">

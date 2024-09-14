@@ -1,0 +1,62 @@
+body {
+    background-color: black;
+    font-family: Arial, sans-serif;
+    color: white;
+    margin: 0;
+  }
+  
+  .profile-container {
+    text-align: center;
+    width: 300px;
+    margin: 0 auto;
+  }
+  
+  .profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    object-fit: cover;
+  }
+  
+  .username {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .handle {
+    font-size: 18px;
+    color: gray;
+    margin-bottom: 20px;
+  }
+  
+  .memories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  
+  .memory {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    margin: 5px;
+    background-size: cover;
+    background-position: center;
+    background-color: #333;
+  }
+  
+  .view-button {
+    background-color: gray;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .view-button:hover {
+    background-color: #444;
+  }
+  

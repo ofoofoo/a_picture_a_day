@@ -10,6 +10,7 @@ import User from "../../../shared/User";
 import "../utilities.css";
 import Upload from "./pages/Upload";
 import NavBar from "./pages/NavBar.tsx";
+import ProfilePage from "./pages/ProfilePage";
 
 const App = () => {
   const [userId, setUserId] = useState<string | undefined>(undefined);
@@ -42,8 +43,9 @@ const App = () => {
 
   return (
     <>
-      <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       <BrowserRouter>
+        <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+
         <Routes>
           {/* <Route
             element={
@@ -53,6 +55,7 @@ const App = () => {
           /> */}
           <Route path="*" element={<NotFound />} />
           <Route path="/" element={<Upload />} />
+          <Route path="/profile" element={<ProfilePage/>} />
         </Routes>
       </BrowserRouter>
     </>
