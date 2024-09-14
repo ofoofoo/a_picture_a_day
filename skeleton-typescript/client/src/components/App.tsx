@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { get, post } from "../utilities";
 import NotFound from "./pages/NotFound";
-import Skeleton from "./pages/Skeleton";
+// import Skeleton from "./pages/Skeleton";
 import User from "../../../shared/User";
 import "../utilities.css";
 import Upload from "./pages/Upload";
