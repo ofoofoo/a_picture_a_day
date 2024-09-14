@@ -27,15 +27,18 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
         <span className="NavBar-link NavBar-loginbutton">
           <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
             {userId ? (
-              <button
-                className="button-54"
-                onClick={() => {
-                  googleLogout();
-                  handleLogout();
-                }}
-              >
-                Logout
-              </button>
+              // <button
+              //   className="button-54"
+              //   onClick={() => {
+              //     googleLogout();
+              //     handleLogout();
+              //   }}
+              // >
+              //   Logout
+              // </button>
+              <Link to="/about" className="NavBar-link">
+                Profile
+              </Link>
             ) : (
               <GoogleLogin onSuccess={handleLogin} />
             )}
