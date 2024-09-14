@@ -22,7 +22,7 @@ const Upload: React.FC = () => {
   return (
     <div className="upload">
       <div className="prompt-box">
-        <h1>Upload Your Image</h1>
+        <h1>Right Place Wrong Time</h1>
       </div>
       <div className="upload-box">
         <label htmlFor="file-upload" className="custom-file-upload">
