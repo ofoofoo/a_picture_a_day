@@ -9,6 +9,8 @@ import Skeleton from "./pages/Skeleton";
 import User from "../../../shared/User";
 import "../utilities.css";
 
+import NavBar from "./pages/NavBar.tsx";
+
 const App = () => {
   const [userId, setUserId] = useState<string | undefined>(undefined);
 
@@ -37,7 +39,10 @@ const App = () => {
 
   // NOTE:
   // All the pages need to have the props extended via RouteComponentProps for @reach/router to work properly. Please use the Skeleton as an example.
+  
   return (
+    <>
+    <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
     <BrowserRouter>
       <Routes>
         <Route
@@ -49,6 +54,7 @@ const App = () => {
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
+    </>
   );
 };
 
