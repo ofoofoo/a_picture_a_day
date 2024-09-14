@@ -28,7 +28,10 @@ const App = () => {
 
   const handleLogin = (credentialResponse: CredentialResponse) => {
     const userToken = credentialResponse.credential;
-    const decodedCredential = jwt_decode(userToken as string) as { name: string; email: string };
+    const decodedCredential = jwt_decode(userToken as string) as {
+      name: string;
+      email: string;
+    };
     console.log(`Logged in as ${decodedCredential.name}`);
     post("/api/login", { token: userToken }).then((user) => {
       setUserId(user._id);
@@ -66,7 +69,12 @@ const App = () => {
           <Route path="/vote" element={uploaded ? <Vote /> : <Navigate to="/upload" />} />
           <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/" element={<Upload />} />
-          <Route path="/profile" element={<ProfilePage userId={userId} handleLogin={handleLogin} handleLogout={handleLogout} />} />
+          <Route
+            path="/profile"
+            element={
+              <ProfilePage userId={userId} handleLogin={handleLogin} handleLogout={handleLogout} />
+            }
+          />
         </Routes>
       </BrowserRouter>
     </>

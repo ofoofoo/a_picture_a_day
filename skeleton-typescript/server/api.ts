@@ -53,14 +53,14 @@ router.get("/userinfo", async (req, res) => {
       votingFor: votingForImage,
     });
   } catch (error) {
-    console.error('Failed to retrieve user info:', error);
+    console.error("Failed to retrieve user info:", error);
     res.status(500).json({
       success: false,
     });
   }
 });
 
-router.post("/upload", upload.single('file'), async (req, res) => {
+router.post("/upload", upload.single("file"), async (req, res) => {
   const file = req.file;
   const userId = req.user?._id;
   const user = await UserModel.findById(userId);
@@ -90,7 +90,7 @@ router.post("/upload", upload.single('file'), async (req, res) => {
     });
     await imageMeta.save();
 
-    user.uploaded = imageMeta._id
+    user.uploaded = imageMeta._id;
     await user.save();
 
     res.status(200).json({
@@ -98,7 +98,7 @@ router.post("/upload", upload.single('file'), async (req, res) => {
       url: response.Location,
     });
   } catch (error) {
-    console.error('Failed to upload image to S3:', error);
+    console.error("Failed to upload image to S3:", error);
     res.status(500).json({
       success: false,
     });
@@ -173,7 +173,7 @@ router.get("/get-images", async (req, res) => {
       imagesWithSignedUrl,
     });
   } catch (error) {
-    console.error('Failed to retrieve images:', error);
+    console.error("Failed to retrieve images:", error);
     res.status(500).json({
       success: false,
     });

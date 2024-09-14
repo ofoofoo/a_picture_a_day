@@ -24,6 +24,7 @@ const getOrCreateUser = (user: TokenPayload) => {
       const newUser = new User({
         name: user.name,
         googleid: user.sub,
+        photoUrl: user.picture,
       });
       return newUser.save();
     }
