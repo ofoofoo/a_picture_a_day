@@ -38,9 +38,15 @@ const App = () => {
     setUserId(undefined);
     post("/api/logout");
   };
-
-  const uploaded = true;
-
+  const [uploaded, changedUploaded] = useState(false);
+  //set uploaded
+  useEffect(() => {
+    get("/api/getuploaded").then((user) => {
+      if (user.upload) {
+        changedUploaded(true);
+      }
+    });
+  }, []);
   // NOTE:
   // All the pages need to have the props extended via RouteComponentProps for @reach/router to work properly. Please use the Skeleton as an example.
 
@@ -55,7 +61,16 @@ const App = () => {
             path="/"
             element={uploaded ? <Navigate to="/vote" /> : <Navigate to="/upload" />}
           />
-          <Route path="/upload" element={uploaded ? <Navigate to="/vote" /> : <Upload />} />
+          <Route
+            path="/upload"
+            element={
+              uploaded ? (
+                <Navigate to="/vote" />
+              ) : (
+                <Upload changedUploaded={changedUploaded} userId={userId} />
+              )
+            }
+          />
           <Route
             path="/profile"
             element={
