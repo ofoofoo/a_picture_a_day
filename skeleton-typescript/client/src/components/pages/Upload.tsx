@@ -34,7 +34,7 @@ const Upload = ({ changedUploaded, userId }) => {
   return (
     <div className="upload">
       <div className="prompt-box">
-        <h1>Right Place Wrong Time</h1>
+        <h1>PROMPT: Right Place Wrong Time</h1>
       </div>
       <>
         {userId === undefined ? (

@@ -90,6 +90,10 @@ const App = () => {
           <Route path="/calendar" element={loggedIn ? <CalendarPage /> : <Navigate to="/" />} />
 
           <Route
+            path="/profile"
+            element={loggedIn ? <ProfilePage userId={userId} handleLogin={handleLogin} handleLogout={handleLogout} /> : <Navigate to="/"/>}
+          />
+          <Route
             path="/upload"
             element={
               uploaded ? (
@@ -99,7 +103,7 @@ const App = () => {
               )
             }
           />
-          <Route
+          {/* <Route
             path="/profile"
             element={
               <ProfilePage
@@ -109,10 +113,10 @@ const App = () => {
                 userPhoto={userPhoto}
               />
             }
-          />
+          /> */}
           <Route path="/vote" element={uploaded ? <Vote /> : <Navigate to="/upload" />} />
-          <Route path="/calendar" element={<CalendarPage />} />
-          <Route
+          {/* <Route path="/calendar" element={<CalendarPage />} /> */}
+          {/* <Route
             path="/profile"
             element={
               <ProfilePage
@@ -122,7 +126,7 @@ const App = () => {
                 userPhoto={userPhoto}
               />
             }
-          />
+          /> */}
         </Routes>
       </BrowserRouter>
     </>
