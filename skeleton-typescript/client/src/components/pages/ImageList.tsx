@@ -10,7 +10,6 @@ interface ImageListProps {
 
 const ImageList: React.FC<ImageListProps> = ({ images, votes, onVote, maxVotes }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
   return (
     <div className="image-list">
       {images.map((image) => (
