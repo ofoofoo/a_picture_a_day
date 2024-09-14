@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Calendar, { CalendarProps } from "react-calendar";
-import "react-calendar/dist/Calendar.css"; 
+import "react-calendar/dist/Calendar.css";
 import "./Calendar.css";
 
 const CalendarPage: React.FC = () => {

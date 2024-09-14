@@ -20,13 +20,27 @@ const fetchImages = async () => {
 };
 
 const Vote: React.FC = () => {
-  const [images, setImages] = useState<{ id: number; url: string; name: string }[]>([]);
+  // const [images, setImages] = useState<{ id: number; url: string; name: string }[]>([]);
   const [votes, setVotes] = useState<number[]>([]);
 
   useEffect(() => {
     const loadImages = async () => {
-      const result = await fetchImages();
-      setImages(result);
+      const curDate = new Date().toISOString();
+      const response = await fetch('/api/get-images?date=' + curDate);
+      const result = await response.json();
+      const images = result.imagesWithSignedUrl;
+
+      const gallery = document.getElementById("image-gallery");
+      if (gallery) {
+        gallery.innerHTML = "";
+      }
+      images.forEach((image) => {
+        const imgElement = document.createElement("img");
+        imgElement.src = image.signedUrl;
+        imgElement.alt = image.name;
+        imgElement.width = 400;
+        gallery?.appendChild(imgElement);
+      });
     };
     loadImages();
   }, []);
@@ -42,7 +56,8 @@ const Vote: React.FC = () => {
   return (
     <div className="app">
       <h1 className="title">Vote for the best one!</h1>
-      <ImageList images={images} votes={votes} onVote={handleVote} maxVotes={MAX_VOTES} />
+      <div id="image-gallery"></div>
+      {/* <ImageList images={images} votes={votes} onVote={handleVote} maxVotes={MAX_VOTES} /> */}
       <p>{`You can vote for up to ${MAX_VOTES} images.`}</p>
     </div>
   );
