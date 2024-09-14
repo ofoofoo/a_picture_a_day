@@ -1,45 +1,71 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ProfilePage.css';
-import { Link } from "@reach/router";
+import { Link } from '@reach/router';
+import {
+  GoogleOAuthProvider,
+  GoogleLogin,
+  googleLogout,
+  CredentialResponse,
+} from '@react-oauth/google';
 
-type Memory = {
-  id: number;
-  imageUrl: string;
-};
+interface ProfilePageProps {
+  userId?: string;
+  handleLogin: (credentialResponse: CredentialResponse) => void;
+  handleLogout: () => void;
+}
 
-const memories: Memory[] = [
-  { id: 1, imageUrl: 'memory1.jpg' },
-  { id: 2, imageUrl: 'memory2.jpg' },
-  { id: 3, imageUrl: 'memory3.jpg' },
-  { id: 4, imageUrl: 'memory4.jpg' },
-  { id: 5, imageUrl: 'memory5.jpg' },
-];
+const GOOGLE_CLIENT_ID =
+  "1058809634774-q5fa4vukq4cll8kc5pu6lv9emvui3bg2.apps.googleusercontent.com";
 
-const ProfilePage: React.FC = () => {
-  return (
-    <div className="profile-container">
-      <img
-        src="profile-pic.jpg"
-        alt="Profile"
-        className="profile-pic"
-      />
-      <div className="username">big shaq</div>
-      <div className="handle">@jbursz</div>
-      
-      <div className="memories">
-        {memories.map(memory => (
-          <div
-            key={memory.id}
-            className="memory"
-            style={{ backgroundImage: `url(${memory.imageUrl})` }}
-          />
-        ))}
+  const ProfilePage: React.FC<ProfilePageProps> = ({ userId, handleLogin, handleLogout }) => {
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  
+    const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files ? event.target.files[0] : null;
+      setSelectedFile(file);
+  
+      if (file) {
+        console.log('Uploaded file:', file);
+        // API call logic here
+      }
+    };
+  
+    return (
+      <div className="profile-container">
+        <img src="profile-pic.jpg" alt="Profile" className="profile-pic" />
+        <div className="username">big shaq</div>
+        <div className="handle">@jbursz</div>
+  
+        <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+          {userId ? (
+            <button
+              className="logout-button"
+              onClick={() => {
+                googleLogout();
+                handleLogout();
+              }}
+            >
+              Logout
+            </button>
+          ) : (
+            <GoogleLogin onSuccess={handleLogin} onError={(err) => console.error(err)} />
+          )}
+        </GoogleOAuthProvider>
+  
+        <Link to="/calendar">
+          <button className="view-button">View all photos</button>
+        </Link>
+  
+        <div className="upload">
+          <div className="upload-box">
+            <label htmlFor="file-upload" className="custom-file-upload">
+              Choose File
+            </label>
+            <input id="file-upload" type="file" accept="image/*" onChange={handleFileUpload} />
+          </div>
+        </div>
       </div>
-      <Link to="/calendar">
-        <button className="view-button">View all photos</button>
-      </Link>
-    </div>
-  );
-};
-
-export default ProfilePage;
+    );
+  };
+  
+  export default ProfilePage;

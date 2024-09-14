@@ -50,8 +50,8 @@ const App = () => {
         <Routes>
           <Route path="*" element={<NotFound />} />
           <Route path="/" element={<Upload />} />
-          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/vote" element={<Vote />} />
+          <Route path="/profile" element={<ProfilePage userId={userId} handleLogin={handleLogin} handleLogout={handleLogout} />} />
         </Routes>
       </BrowserRouter>
     </>
