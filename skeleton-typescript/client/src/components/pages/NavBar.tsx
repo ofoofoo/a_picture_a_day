@@ -45,7 +45,7 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
               // >
               //   Logout
               // </button>
-              <Link to="/about" className="NavBar-link">
+              <Link to="/profile" className="NavBar-link">
                 Profile
               </Link>
             ) : (

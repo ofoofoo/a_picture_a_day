@@ -51,9 +51,13 @@ const App = () => {
         <Routes>
           <Route path="*" element={<NotFound />} />
           <Route path="/" element={<Upload />} />
-          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/vote" element={<Vote />} />
+<<<<<<< HEAD
           <Route path="/calendar" element={<CalendarPage />} />
+||||||| 2a998d7
+=======
+          <Route path="/profile" element={<ProfilePage userId={userId} handleLogin={handleLogin} handleLogout={handleLogout} />} />
+>>>>>>> refs/remotes/origin/main
         </Routes>
       </BrowserRouter>
     </>
