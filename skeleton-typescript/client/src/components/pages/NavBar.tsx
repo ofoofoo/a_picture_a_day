@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "@reach/router";
-// import { Link } from "react-router-dom";
+import { FaCalendarAlt } from "react-icons/fa"; // Importing the calendar icon
 
 import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
 
@@ -20,6 +20,9 @@ const NavBar = ({ userId, handleLogin, handleLogout }) => {
         </Link>
       </div>
       <div className="NavBar-linkContainer u-inlineBlock">
+        <Link to="/calendar" className="NavBar-link, NavBar-calendar">
+            <FaCalendarAlt size={24} /> {/* Calendar icon */}
+        </Link>
         <span className="NavBar-link NavBar-loginbutton">
           <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
             {userId ? (

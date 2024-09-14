@@ -26,6 +26,15 @@
   
     margin-left: var(--l);
   }
+
+  .NavBar-calendar {
+    font-size: 24px;
+    color: #000;
+  }
+  
+  .NavBar-calendar:hover {
+    color: #ccc;
+  }
   
   .NavBar-link,
   .NavBar-link:visited {
