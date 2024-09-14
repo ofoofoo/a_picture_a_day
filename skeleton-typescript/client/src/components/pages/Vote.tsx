@@ -3,7 +3,7 @@ import "./Vote.css";
 import ImageList from "./ImageList";
 
 // Define how many images a user can vote for
-const MAX_VOTES = 3;
+const MAX_VOTES = 1;
 
 // Mock API call for images (Replace with real API call)
 const fetchImages = async () => {
@@ -20,26 +20,30 @@ const fetchImages = async () => {
 };
 
 const Vote: React.FC = () => {
-  // const [images, setImages] = useState<{ id: number; url: string; name: string }[]>([]);
+  const [images, setImages] = useState<{ id: number; url: string; name: string }[]>([]);
   const [votes, setVotes] = useState<number[]>([]);
 
   useEffect(() => {
     const loadImages = async () => {
       const curDate = new Date().toISOString();
-      const response = await fetch('/api/get-images?date=' + curDate);
+      const response = await fetch("/api/get-images?date=" + curDate);
       const result = await response.json();
-      const images = result.imagesWithSignedUrl;
+      const imagest = result.imagesWithSignedUrl;
 
-      const gallery = document.getElementById("image-gallery");
-      if (gallery) {
-        gallery.innerHTML = "";
-      }
-      images.forEach((image) => {
-        const imgElement = document.createElement("img");
-        imgElement.src = image.signedUrl;
-        imgElement.alt = image.name;
-        imgElement.width = 400;
-        gallery?.appendChild(imgElement);
+      //   const gallery = document.getElementById("image-gallery");
+      //   if (gallery) {
+      //     gallery.innerHTML = "";
+      //   }
+      let id = 0;
+      imagest.forEach((image) => {
+        // const imgElement = document.createElement("img");
+        // imgElement.src = image.signedUrl;
+        // console.log(image.signedUrl);
+        // imgElement.alt = image.name;
+        // imgElement.width = 400;
+        // gallery?.appendChild(imgElement);
+        setImages([...images, { id: id, url: image.signedUrl, name: image.name }]);
+        id = id + 1;
       });
     };
     loadImages();
@@ -56,9 +60,9 @@ const Vote: React.FC = () => {
   return (
     <div className="app">
       <h1 className="title">Vote for the best one!</h1>
-      <div id="image-gallery"></div>
-      {/* <ImageList images={images} votes={votes} onVote={handleVote} maxVotes={MAX_VOTES} /> */}
-      <p>{`You can vote for up to ${MAX_VOTES} images.`}</p>
+      {/* <div id="image-gallery"></div> */}
+      <ImageList images={images} votes={votes} onVote={handleVote} maxVotes={MAX_VOTES} />
+      {/* <p>{`You can vote for up to ${MAX_VOTES} image.`}</p> */}
     </div>
   );
 };
