@@ -22,7 +22,7 @@ const App = () => {
       if (user._id) {
         // TRhey are registed in the database and currently logged in.
         setUserId(user._id);
-        // changeLog(true);
+        changeLog(true);
       }
     });
   }, []);
@@ -49,10 +49,14 @@ const App = () => {
   //set uploaded
   useEffect(() => {
     console.log(loggedIn);
-    if (!isMounted.current) {
-      isMounted.current = true;
+    // if (!isMounted.current) {
+    //   isMounted.current = true;
+    //   return;
+    // }
+    if (userId === undefined) {
       return;
     }
+    console.log("hello");
     get("/api/getuploaded").then((user) => {
       if (user.upload) {
         changedUploaded(true);
