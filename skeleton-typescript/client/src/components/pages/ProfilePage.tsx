@@ -36,6 +36,11 @@ const GOOGLE_CLIENT_ID =
         <div className="username">big shaq</div>
         <div className="handle">@jbursz</div>
   
+        <Link to="/calendar">
+          <button className="view-button">View all photos</button>
+        </Link>
+
+        <div>
         <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
           {userId ? (
             <button
@@ -51,10 +56,8 @@ const GOOGLE_CLIENT_ID =
             <GoogleLogin onSuccess={handleLogin} />
           )}
         </GoogleOAuthProvider>
-  
-        <Link to="/calendar">
-          <button className="view-button">View all photos</button>
-        </Link>
+        </div>
+
   
         <div className="upload">
           <div className="upload-box">
