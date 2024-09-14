@@ -91,7 +91,18 @@ const App = () => {
 
           <Route
             path="/profile"
-            element={loggedIn ? <ProfilePage userId={userId} handleLogin={handleLogin} handleLogout={handleLogout} /> : <Navigate to="/"/>}
+            element={
+              loggedIn ? (
+                <ProfilePage
+                  userId={userId}
+                  handleLogin={handleLogin}
+                  handleLogout={handleLogout}
+                  userPhoto={userPhoto}
+                />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
           />
           <Route
             path="/upload"
