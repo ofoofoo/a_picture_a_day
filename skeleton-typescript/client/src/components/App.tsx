@@ -64,12 +64,10 @@ const App = () => {
     if (userId === undefined) {
       return;
     }
-    console.log("uploaded");
-    console.log(uploaded);
-    get("/api/getuploaded").then((user) => {
+    get("/api/userinfo").then((res) => {
       console.log("hawk dhjshjs");
-      console.log(user.upload);
-      if (user.upload) {
+      console.log(res.uploaded);
+      if (res.uploaded) {
         changedUploaded(true);
       }
     });

@@ -46,7 +46,7 @@ function resetDay() {
             const winner = new WinnerModel({
                 image: winningImage._id,
                 user: winningUser._id,
-                date: yesterday,
+                date: start,
                 prompt,
                 votes: winningImage.votes,
             });

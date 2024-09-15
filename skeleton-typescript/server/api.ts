@@ -196,51 +196,21 @@ router.get("/userinfo", async (req, res) => {
       return res.status(401).send("Not logged in.");
     }
 
-    const user = await UserModel.findById(userId);
+    const user = await UserModel.findById(userId).populate({
+      path: "uploaded",
+      populate: { path: "uploadedBy" },
+      options: { maxDepth: 1 }
+    });
     if (!user) {
       return res.status(404).send("User not found.");
     }
 
-    console.log("hullo dumbass");
     res.status(200).json({
       success: true,
       _id: user._id,
       name: user.name,
       uploaded: user.uploaded,
       votingFor: user.votingFor,
-    });
-  } catch (error) {
-    console.error("Failed to retrieve user info:", error);
-    res.status(500).json({
-      success: false,
-    });
-  }
-});
-
-router.get("/getuploaded", async (req, res) => {
-  try {
-    const userId = req.user?._id;
-    if (!userId) {
-      return res.status(401).send("Not logged in.");
-    }
-
-    const user = await UserModel.findById(userId);
-    if (!user) {
-      return res.status(404).send("User not found.");
-    }
-
-    // const uploadedImage = ImageModel.findById(user.uploaded);
-    let upload = true;
-    console.log(user.uploaded);
-    if (user.uploaded === null) {
-      upload = false;
-    }
-
-    res.status(200).json({
-      success: true,
-      _id: user._id,
-      name: user.name,
-      upload: upload,
     });
   } catch (error) {
     console.error("Failed to retrieve user info:", error);
@@ -458,6 +428,7 @@ router.get("/get-winner", async (req, res) => {
         ...image.toObject(),
         signedUrl,
       },
+      prompt: winner.prompt,
     });
   } catch (error) {
     console.error("Failed to retrieve winner:", error);
