@@ -11,7 +11,7 @@ dotenv.config({});
 axios.defaults.baseURL = `http://localhost:${process.env.PORT || 3000}`;
 
 function resetDay() {
-    cron.schedule('0 0 * * *', async () => {
+    cron.schedule('*/1 * * * *', async () => {
         try {
             console.log("Computing yesterday's winner ...");
             const yesterday = new Date();
@@ -40,10 +40,14 @@ function resetDay() {
                 return;
             }
 
+            const response = await axios.get('/api/prompt');
+            const prompt = response.data.prompt;
+
             const winner = new WinnerModel({
                 image: winningImage._id,
                 user: winningUser._id,
                 date: yesterday,
+                prompt,
                 votes: winningImage.votes,
             });
             await winner.save();
