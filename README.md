@@ -2,8 +2,7 @@
 
 Made by Abhay Bestrapalli, Mason Fang, Orion Foo, and Nathan Xiong.
 
-![alt text](https://media.discordapp.net/attachments/975839431468650589/1152843721168134285/image.png?width=1846&height=906)
-
+![alt text](readme.png)
 ## How it works
 
 Each day, a prompt is generated, and each user uploads a photo that they think fits the prompt. All users can then vote on what they think is the best/funniest/etc. photo of the day.
