@@ -24,7 +24,7 @@ const ImageList: React.FC<ImageListProps> = ({ images, votes, onVote, maxVotes }
             disabled={votes.includes(image.id)}
             // disabled={!votes.includes(image.id) && votes.length >= maxVotes}
           >
-            {votes.includes(image.id) ? "Unvote" : "Vote"}
+            {votes.includes(image.id) ? "Voted" : "Vote"}
           </button>
         </div>
       ))}

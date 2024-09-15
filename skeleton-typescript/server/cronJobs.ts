@@ -11,7 +11,7 @@ dotenv.config({});
 axios.defaults.baseURL = `http://localhost:${process.env.PORT || 3000}`;
 
 function resetDay() {
-    cron.schedule('*/1 * * * *', async () => {
+    cron.schedule('*/5 * * * *', async () => {
         try {
             console.log("Computing yesterday's winner ...");
             const yesterday = new Date();

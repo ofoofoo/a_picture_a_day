@@ -39,10 +39,6 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
 
       <img src={userPhoto} alt="Profile" className="profile-pic" />
 
-      <div className="streak-counter">
-        <FaFire />
-        <span className="streak-text"> k-day streak</span>
-      </div>
 
       <Link to="/calendar">
         <button className="view-button">View all photos</button>
