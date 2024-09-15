@@ -8,11 +8,13 @@
   /* justify-content: flex-start; Keep items at the bottom */
   align-items: center;
   font-family: "Arial", sans-serif;
-  overflow-y: auto; /* Enable vertical scrolling */
-  padding-top: 50px; /* Space at the top */
-  scroll-padding-bottom: 100px; /* Optional, if scroll-snapping is used */
+  overflow-y: auto;
+  /* padding-top: 50px; Space at the top */
+  scroll-padding-bottom: 100px;
+  height: 101vh;
+  padding-bottom: 100px;
+  padding-top: 100px;
   position: relative;
-  box-sizing: border-box; /* Ensure padding is included in height calculation */
 }
 
 .title {
