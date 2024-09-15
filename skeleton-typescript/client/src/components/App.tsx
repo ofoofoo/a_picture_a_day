@@ -17,7 +17,7 @@ const App = () => {
   const [userId, setUserId] = useState<string | undefined>(undefined);
   const [userName, setUserName] = useState<string | undefined>(undefined);
   const [userPhoto, setUserPhoto] = useState<string | undefined>(undefined);
-  const [loggedIn, changeLog] = useState(false);
+  const [loggedIn, changeLog] = useState(true);
   const isMounted = useRef(false);
   useEffect(() => {
     get("/api/whoami").then((user: User) => {
@@ -27,6 +27,8 @@ const App = () => {
         setUserPhoto(user.photoUrl);
         setUserName(user.name);
         changeLog(true);
+      } else {
+        changeLog(false);
       }
     });
   }, []);
