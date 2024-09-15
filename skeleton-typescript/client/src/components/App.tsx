@@ -55,7 +55,7 @@ const App = () => {
     post("/api/logout");
     changeLog(false);
   };
-  const [uploaded, changedUploaded] = useState(false);
+  const [uploaded, changeUploaded] = useState(true);
   //set uploaded
   useEffect(() => {
     console.log(loggedIn);
@@ -67,10 +67,11 @@ const App = () => {
       return;
     }
     get("/api/userinfo").then((res) => {
-      console.log("hawk dhjshjs");
       console.log(res.uploaded);
       if (res.uploaded) {
-        changedUploaded(true);
+        changeUploaded(true);
+      } else {
+        changeUploaded(false);
       }
     });
   }, [loggedIn]);
@@ -106,7 +107,7 @@ const App = () => {
                   handleLogout={handleLogout}
                   userPhoto={userPhoto}
                   userName={userName}
-                  changedUploaded={changedUploaded}
+                  changeUploaded={changeUploaded}
                 />
               ) : (
                 <Navigate to="/upload" />
@@ -119,7 +120,7 @@ const App = () => {
               uploaded ? (
                 <Navigate to="/vote" />
               ) : (
-                <Upload changedUploaded={changedUploaded} userId={userId} />
+                <Upload changeUploaded={changeUploaded} userId={userId} />
               )
             }
           />

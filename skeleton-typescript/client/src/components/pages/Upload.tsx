@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Upload.css";
 import { useNavigate } from "react-router-dom";
 
-const Upload = ({ changedUploaded, userId }) => {
+const Upload = ({ changeUploaded, userId }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [prompt, setPrompt] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const Upload = ({ changedUploaded, userId }) => {
 
         const result = await res.json();
         console.log(result);
-        changedUploaded(true);
+        changeUploaded(true);
         navigate("/vote");
       } catch (error) {
         console.error("Failed to upload image:", error);

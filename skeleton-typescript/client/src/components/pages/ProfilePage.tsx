@@ -16,7 +16,7 @@ interface ProfilePageProps {
   handleLogout: () => void;
   userPhoto?: string;
   userName?: string;
-  changedUploaded: (boolean) => void;
+  changeUploaded: (boolean) => void;
 }
 
 const GOOGLE_CLIENT_ID =
@@ -28,7 +28,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
   handleLogout,
   userPhoto,
   userName,
-  changedUploaded,
+  changeUploaded,
 }) => {
   return (
     <div className="profile-container">
@@ -51,7 +51,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
               className="logout-button"
               onClick={() => {
                 googleLogout();
-                changedUploaded(false);
+                changeUploaded(false);
                 handleLogout();
               }}
             >
