@@ -198,10 +198,19 @@ router.get("/get-image", async (req, res) => {
       return res.status(500).send("More than one image found.");
     }
 
-    const image = images[0];
+    const params = {
+      Bucket: process.env.S3_BUCKET_NAME as string,
+      Key: images[0].filekey,
+      Expires: 7200,
+    };
+    const signedUrl = s3.getSignedUrl("getObject", params);
+
     res.status(200).json({
       success: true,
-      image,
+      image: {
+        ...images[0].toObject(),
+        signedUrl,
+      },
     });
   } catch (error) {
     console.error("Failed to retrieve image:", error);

@@ -23,11 +23,13 @@ const CalendarPage: React.FC = () => {
   const onDateClick: CalendarProps["onClickDay"] = (value, event) => {
     setSelectedDate(value);
     console.log(startOfDay(value));
-    get("/api/get-winner", { date: value })
-      .then((info) => {
-        setWinnerImage(info.image.signedUrl);
-      })
-      .then(() => setIsModalOpen(true));
+    get("/api/get-winner", { date: value }).then((info) => {
+      setWinnerImage(info.image.signedUrl);
+    });
+    get("/api/get-image", { date: value }).then((info) => {
+      setUserImage(info.image.signedUrl);
+    });
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
@@ -53,7 +55,7 @@ const CalendarPage: React.FC = () => {
               </div>
               <div className="image-wrapper">
                 yours
-                <img src="path-to-image-2" alt="Image 2" />
+                <img src={userImage} alt="your image" />
               </div>
             </div>
             <div className="bottom-content">
