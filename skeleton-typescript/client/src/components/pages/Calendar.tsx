@@ -8,6 +8,7 @@ const CalendarPage: React.FC = () => {
   const [date, setDate] = useState<Date>(new Date()); // current date
   const [winnerImage, setWinnerImage] = useState<string | undefined>(undefined);
   const [userImage, setUserImage] = useState<string | undefined>(undefined);
+  const [prompt, setPrompt] = useState<string | undefined>(undefined);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined); // stores clicked data
 
@@ -26,9 +27,11 @@ const CalendarPage: React.FC = () => {
     get("/api/get-winner", { date: value })
       .then((info) => {
         setWinnerImage(info.image.signedUrl);
+        setPrompt(info.prompt);
       })
       .catch(() => {
         setWinnerImage(undefined);
+        setPrompt(undefined);
       });
 
     get("/api/get-image", { date: value })
@@ -57,7 +60,7 @@ const CalendarPage: React.FC = () => {
       {isModalOpen && selectedDate && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h1>Images for {selectedDate.toDateString()}</h1>
+            {prompt !== undefined ? <h1>{prompt}</h1> : <h1>Nobody played :(</h1>}
             <div className="image-container">
               <div className="image-wrapper">
                 {winnerImage !== undefined ? (
