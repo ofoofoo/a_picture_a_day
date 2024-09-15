@@ -10,51 +10,69 @@ dotenv.config({});
 // change server url to final url
 axios.defaults.baseURL = `http://localhost:${process.env.PORT || 3000}`;
 
+async function getWinner() {
+    try {
+        console.log("Computing yesterday's winner ...");
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        const start = startOfDay(yesterday);
+        const end = endOfDay(yesterday);
+
+        const images = await ImageModel.find({
+            uploadedAt: {
+                $gte: start,
+                $lt: end,
+            },
+        });
+
+        if (images.length === 0) {
+            console.log('No images uploaded yesterday.');
+            return;
+        }
+
+        const winningImage = images.reduce((prev, current) => {
+            return prev.votes > current.votes ? prev : current;
+        });
+        const winningUser = await UserModel.findById(winningImage.uploadedBy);
+        if (!winningUser) {
+            console.log('Winner user not found.');
+            return;
+        }
+
+        const response = await axios.get('/api/prompt');
+        const prompt = response.data.prompt;
+
+        const winner = new WinnerModel({
+            image: winningImage._id,
+            user: winningUser._id,
+            date: start,
+            prompt,
+            votes: winningImage.votes,
+        });
+        await winner.save();
+        console.log(`Winner saved for ${yesterday.toDateString()}`);
+    } catch (error) {
+        console.error(`Failed to get winner: ${error}`);
+    }
+}
+
+async function resetUsers() {
+    try {
+        console.log("Resetting users' uploads ...");
+        const response = await axios.post('/api/reset-users');
+        if (response.status === 200) {
+            console.log('Users reset successfully.');
+        } else {
+            console.error('Failed to reset users.');
+        }
+    } catch (error) {
+        console.error(`Failed to reset users: ${error}`);
+    }
+}
+
 function resetDay() {
     cron.schedule('*/5 * * * *', async () => {
-        try {
-            console.log("Computing yesterday's winner ...");
-            const yesterday = new Date();
-            yesterday.setDate(yesterday.getDate() - 1);
-            const start = startOfDay(yesterday);
-            const end = endOfDay(yesterday);
-
-            const images = await ImageModel.find({
-                uploadedAt: {
-                    $gte: start,
-                    $lt: end,
-                },
-            });
-
-            if (images.length === 0) {
-                console.log('No images uploaded yesterday.');
-                return;
-            }
-
-            const winningImage = images.reduce((prev, current) => {
-                return prev.votes > current.votes ? prev : current;
-            });
-            const winningUser = await UserModel.findById(winningImage.uploadedBy);
-            if (!winningUser) {
-                console.log('Winner user not found.');
-                return;
-            }
-
-            const response = await axios.get('/api/prompt');
-            const prompt = response.data.prompt;
-
-            const winner = new WinnerModel({
-                image: winningImage._id,
-                user: winningUser._id,
-                date: start,
-                prompt,
-                votes: winningImage.votes,
-            });
-            await winner.save();
-            console.log(`Winner saved for ${yesterday.toDateString()}`);
-        } catch (error) {
-            console.error(`Failed to get winner: ${error}`);
-        }
+        await getWinner();
 
         try {
             console.log("Changing prompt for today ...");
@@ -63,17 +81,7 @@ function resetDay() {
             console.error(`Failed to change prompt: ${error}`);
         }
 
-        try {
-            console.log("Resetting users' uploads ...");
-            const response = await axios.post('/api/reset-users');
-            if (response.status === 200) {
-                console.log('Users reset successfully.');
-            } else {
-                console.error('Failed to reset users.');
-            }
-        } catch (error) {
-            console.error(`Failed to reset users: ${error}`);
-        }
+        await resetUsers();
     });
 }
 

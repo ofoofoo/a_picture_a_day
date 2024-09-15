@@ -58,16 +58,16 @@ const App = () => {
   const [uploaded, changeUploaded] = useState(true);
   //set uploaded
   useEffect(() => {
-    console.log(loggedIn);
     // if (!isMounted.current) {
     //   isMounted.current = true;
     //   return;
     // }
     if (userId === undefined) {
+      changeLog(false);
+      changeUploaded(false);
       return;
     }
     get("/api/userinfo").then((res) => {
-      console.log(res.uploaded);
       if (res.uploaded) {
         changeUploaded(true);
       } else {
