@@ -1,10 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Upload.css";
 import { useNavigate } from "react-router-dom";
 
 const Upload = ({ changedUploaded, userId }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [prompt, setPrompt] = useState<string | null>(null);
   const navigate = useNavigate();
+
+  const fetchPrompt = async () => {
+    try {
+      const response = await fetch("/api/prompt");
+      const result = await response.json();
+      setPrompt(result.prompt);
+    } catch (error) {
+      console.error("Failed to fetch prompt:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchPrompt();
+  }, []);
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files ? event.target.files[0] : null;
@@ -34,7 +49,7 @@ const Upload = ({ changedUploaded, userId }) => {
   return (
     <div className="upload">
       <div className="prompt-box">
-        <h1>PROMPT: Right Place Wrong Time</h1>
+        <h1>PROMPT: {prompt || "Loading ..."}</h1>
       </div>
       <>
         {userId === undefined ? (

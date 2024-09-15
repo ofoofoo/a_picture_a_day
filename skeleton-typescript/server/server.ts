@@ -7,6 +7,7 @@ import morgan from "morgan"; // Request logger (https://github.com/expressjs/mor
 import path from "path"; // Allows us to retrieve file paths
 import auth from "./auth"; // weblab authentication helper
 import api from "./api";
+import getWinner from "./cronJobs";
 // Loads environmental variables
 dotenv.config({});
 
@@ -30,6 +31,9 @@ mongoose
 
 // Create a new Express server
 const app = express();
+
+// Setup cron jobs
+getWinner();
 
 // Middleware setup.
 app.use(express.json());
