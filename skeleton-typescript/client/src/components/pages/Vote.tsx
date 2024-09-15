@@ -38,6 +38,7 @@ const Vote: React.FC = () => {
       });
       return images;
     };
+
     loadImages()
       .then((images) => {
         setImages(images);
@@ -45,7 +46,11 @@ const Vote: React.FC = () => {
       .then(() => get("/api/userinfo"))
       .then((info) => {
         setVotes(info.votingFor === null ? [] : [info.votingFor]);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch images:", error);
       });
+
   }, []);
 
   // const handleVote = (imageId: number) => {

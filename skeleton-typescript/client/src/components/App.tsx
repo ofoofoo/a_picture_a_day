@@ -18,6 +18,7 @@ const App = () => {
   const [userName, setUserName] = useState<string | undefined>(undefined);
   const [userPhoto, setUserPhoto] = useState<string | undefined>(undefined);
   const [loggedIn, changeLog] = useState(true);
+  const [uploaded, changeUploaded] = useState(true);
   const isMounted = useRef(false);
   useEffect(() => {
     get("/api/whoami").then((user: User) => {
@@ -27,11 +28,20 @@ const App = () => {
         setUserPhoto(user.photoUrl);
         setUserName(user.name);
         changeLog(true);
+
+        get("/api/userinfo").then((res) => {
+          if (res.uploaded) {
+            changeUploaded(true);
+          } else {
+            changeUploaded(false);
+          }
+        });
       } else {
         changeLog(false);
+        changeUploaded(false);
       }
     });
-  }, []);
+  }, [loggedIn]);
 
   const handleLogin = (credentialResponse: CredentialResponse) => {
     const userToken = credentialResponse.credential;
@@ -54,27 +64,27 @@ const App = () => {
     setUserName(undefined);
     post("/api/logout");
     changeLog(false);
+    changeUploaded(false);
   };
-  const [uploaded, changeUploaded] = useState(true);
-  //set uploaded
-  useEffect(() => {
-    // if (!isMounted.current) {
-    //   isMounted.current = true;
-    //   return;
-    // }
-    if (userId === undefined) {
-      changeLog(false);
-      changeUploaded(false);
-      return;
-    }
-    get("/api/userinfo").then((res) => {
-      if (res.uploaded) {
-        changeUploaded(true);
-      } else {
-        changeUploaded(false);
-      }
-    });
-  }, [loggedIn]);
+
+  // useEffect(() => {
+  //   // if (!isMounted.current) {
+  //   //   isMounted.current = true;
+  //   //   return;
+  //   // }
+  //   if (userId === undefined) {
+  //     changeLog(false);
+  //     changeUploaded(false);
+  //     return;
+  //   }
+  //   get("/api/userinfo").then((res) => {
+  //     if (res.uploaded) {
+  //       changeUploaded(true);
+  //     } else {
+  //       changeUploaded(false);
+  //     }
+  //   });
+  // }, [loggedIn]);
   // NOTE:
   // All the pages need to have the props extended via RouteComponentProps for @reach/router to work properly. Please use the Skeleton as an example.
 
@@ -117,11 +127,7 @@ const App = () => {
           <Route
             path="/upload"
             element={
-              uploaded ? (
-                <Navigate to="/vote" />
-              ) : (
-                <Upload changeUploaded={changeUploaded} userId={userId} />
-              )
+              uploaded ? <Navigate to="/vote" /> : <Upload changeUploaded={changeUploaded} userId={userId} />
             }
           />
           <Route path="/vote" element={uploaded ? <Vote /> : <Navigate to="/upload" />} />
