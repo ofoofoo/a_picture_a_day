@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Vote.css";
 import ImageList from "./ImageList";
-
+import CountdownTimer from "./Countdown";
 import { get, post } from "../../utilities";
 
 // Define how many images a user can vote for
 const MAX_VOTES = 1;
+
+
 
 const Vote: React.FC = () => {
   const [imagestwo, setImages] = useState<{ id: number; url: string; name: string }[]>([]);
@@ -71,6 +73,7 @@ const Vote: React.FC = () => {
 
   return (
     <div className="app">
+      <CountdownTimer/>
       <h1 className="title">Vote for the best one!</h1>
 
       <div className="prompt-box">
