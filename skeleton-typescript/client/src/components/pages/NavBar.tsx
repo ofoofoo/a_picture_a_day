@@ -25,7 +25,7 @@ const NavBar = ({ userId, handleLogin, handleLogout, userPhoto, loggedIn }) => {
     <nav className="NavBar-container">
       <div className="NavBar-title u-inlineBlock">
         <Link to="/" className="NavBar-title">
-          <span className="gradient1-text">A Pic A Day</span>
+          <span className="gradient1-text">Seen</span>
         </Link>
       </div>
       <div className="NavBar-container, NavBar-right-align">
