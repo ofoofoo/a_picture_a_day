@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import Calendar, { CalendarProps } from "react-calendar";
 import "./Calendar.css";
-import { startOfDay, endOfDay } from "date-fns";
-
+import { startOfDay } from "date-fns";
 import { get } from "../../utilities";
 
 const CalendarPage: React.FC = () => {
@@ -49,14 +48,14 @@ const CalendarPage: React.FC = () => {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h1>Images for {selectedDate.toDateString()}</h1>
             <div className="image-container">
-              <div className="image-wrapper">
-                winner
-                <img src={winnerImage} alt="winner image" />
-              </div>
-              <div className="image-wrapper">
-                yours
-                <img src={userImage} alt="your image" />
-              </div>
+            <div className="image-wrapper">
+                <img src={winnerImage} alt="winner image" className="image_scaled" />
+                <p className="image-label">Winner</p>
+            </div>
+            <div className="image-wrapper">
+                <img src={userImage} alt="your image" className="image_scaled" />
+                <p className="image-label">Your Submission</p>
+            </div>
             </div>
             <div className="bottom-content">
               <p>{selectedDate.toDateString()}</p>
