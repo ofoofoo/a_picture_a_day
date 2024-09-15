@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
-// import { Link } from "@reach/router";
 import { FaCalendarAlt } from "react-icons/fa"; // Importing the calendar icon
 import { Link } from "react-router-dom";
-import { NavLink } from "react-router-dom";
 
 import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
 
@@ -25,6 +23,7 @@ const NavBar = ({ userId, handleLogin, handleLogout, userPhoto, loggedIn }) => {
     <nav className="NavBar-container">
       <div className="NavBar-title u-inlineBlock">
         <Link to="/" className="NavBar-title">
+            <img src="favicon.png" className="NavBar-logo"/>
           <span className="gradient1-text">Seen</span>
         </Link>
       </div>

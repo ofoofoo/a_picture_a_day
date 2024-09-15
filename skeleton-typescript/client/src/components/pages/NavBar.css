@@ -21,6 +21,7 @@
   text-decoration: none;
   font-weight: bold;
   font-size: 35px;
+  margin-top: 10px;
 }
 
 .NavBar-linkContainer {
@@ -70,6 +71,15 @@
   display: flex;
   align-items: center;
 }
+
+.NavBar-logo {
+    width: 75px;   /* Adjust width as needed */
+    height: auto;  /* Maintain aspect ratio */
+    vertical-align: middle;  /* Aligns the logo with the text */
+    margin-right: 4wpx;  /* Adds space between the logo and the text */
+    margin-top: 12px;
+  }
+  
 
 /* body {
   font-family: Inter;
