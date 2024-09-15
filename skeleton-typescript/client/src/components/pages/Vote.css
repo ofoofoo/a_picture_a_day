@@ -1,6 +1,6 @@
 /* Main app styling */
 .app {
-  background-color: #000;
+  background-color: transparent;
   color: #fff;
   min-height: 100vh;
   display: flex;
@@ -8,7 +8,9 @@
   justify-content: flex-start;
   align-items: center;
   font-family: "Arial", sans-serif;
-  padding: 20px;
+  overflow-y: auto;
+  /* padding-bottom: 100px;
+  padding-top: 50px; */
 }
 
 .title {

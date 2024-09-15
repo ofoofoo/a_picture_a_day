@@ -140,7 +140,7 @@ const App = () => {
                   handleLogout={handleLogout}
                   userPhoto={userPhoto}
                   userName={userName}
-                  changedUploaded={changedUploaded}
+                  changeUploaded={changeUploaded}
                 />
               ) : (
                 <Navigate to="/upload" />
@@ -153,7 +153,7 @@ const App = () => {
               uploaded ? (
                 <Navigate to="/vote" />
               ) : (
-                <Upload changedUploaded={changedUploaded} userId={userId} />
+                <Upload changeUploaded={changeUploaded} userId={userId} />
               )
             }
           />
