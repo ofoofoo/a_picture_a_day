@@ -85,6 +85,15 @@
   color: #000;
 }
 
+.normal-text {
+  color: inherit;
+  text-decoration: none;
+}
+
+.normal-text:hover {
+  color: #000;
+}
+
 /* body {
   font-family: Inter;
 } */

@@ -23,11 +23,14 @@ const NavBar = ({ userId, handleLogin, handleLogout, userPhoto, loggedIn }) => {
     <nav className="NavBar-container">
       <div className="NavBar-title u-inlineBlock">
         <Link to="/" className="NavBar-title">
-            <img src="favicon.png" className="NavBar-logo"/>
+          <img src="favicon.png" className="NavBar-logo" />
           <span className="gradient1-text">Seen</span>
         </Link>
       </div>
       <div className="NavBar-container, NavBar-right-align">
+        <Link to="/about" className="normal-text">
+          <div>About &nbsp;&nbsp;&nbsp;&nbsp;</div>
+        </Link>
         {loggedIn && (
           <Link to="/calendar" className="NavBar-link, NavBar-calendar">
             <FaCalendarAlt size={30} /> {/* Calendar icon */}

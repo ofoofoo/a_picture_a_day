@@ -34,11 +34,9 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
     <div className="profile-container">
       <div className="name-section">
         <div className="username">{userName}</div>
-        {/* <div className="handle">@jbursz</div> */}
       </div>
 
       <img src={userPhoto} alt="Profile" className="profile-pic" />
-
 
       <Link to="/calendar">
         <button className="view-button">View all photos</button>
@@ -62,15 +60,6 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
           )}
         </GoogleOAuthProvider>
       </div>
-
-      {/* <div className="upload">
-        <div className="upload-box">
-          <label htmlFor="file-upload" className="custom-file-upload">
-            Choose File
-          </label>
-          <input id="file-upload" type="file" accept="image/*" onChange={handleFileUpload} />
-        </div>
-      </div> */}
     </div>
   );
 };
