@@ -1,6 +1,6 @@
 /* Styling for the entire app */
 .upload {
-  background-color: #000;
+  background-color: transparent !important;
   color: #fff;
   min-height: 100vh;
   display: flex;

@@ -12,6 +12,11 @@ import NavBar from "./pages/NavBar.tsx";
 import ProfilePage from "./pages/ProfilePage";
 import Vote from "./pages/Vote.tsx";
 import CalendarPage from "./pages/Calendar";
+import BIRDS from "vanta/dist/vanta.birds.min";
+// import VantaComponent from "./pages/VantaComponent";
+import * as THREE from "three";
+import VANTA from "vanta/dist/vanta.net.min";
+import NET from "vanta/dist/vanta.net.min"; // Import the specific Vanta effect
 
 const App = () => {
   const [userId, setUserId] = useState<string | undefined>(undefined);
@@ -88,51 +93,75 @@ const App = () => {
   // NOTE:
   // All the pages need to have the props extended via RouteComponentProps for @reach/router to work properly. Please use the Skeleton as an example.
 
+  const [vantaEffect, setVantaEffect] = useState(null);
+  const myRef = useRef(null);
+  useEffect(() => {
+    if (!vantaEffect) {
+      setVantaEffect(
+        NET({
+          el: myRef.current,
+          THREE: THREE,
+          color: 0xff3f81,
+          backgroundColor: "black",
+          spacing: 18,
+        })
+      );
+    }
+    return () => {
+      // if (vantaEffect) vantaEffect.destroy();
+    };
+  }, [vantaEffect]);
   return (
     <>
-      <BrowserRouter>
-        <NavBar
-          handleLogin={handleLogin}
-          handleLogout={handleLogout}
-          userId={userId}
-          userPhoto={userPhoto}
-          loggedIn={loggedIn}
-        />
+      <div ref={myRef}>
+        <BrowserRouter>
+          <NavBar
+            handleLogin={handleLogin}
+            handleLogout={handleLogout}
+            userId={userId}
+            userPhoto={userPhoto}
+            loggedIn={loggedIn}
+          />
 
-        <Routes>
-          <Route path="*" element={<NotFound />} />
-          <Route
-            path="/"
-            element={uploaded ? <Navigate to="/vote" /> : <Navigate to="/upload" />}
-          />
-          <Route path="/calendar" element={loggedIn ? <CalendarPage /> : <Navigate to="/" />} />
+          <Routes>
+            <Route path="*" element={<NotFound />} />
+            <Route
+              path="/"
+              element={uploaded ? <Navigate to="/vote" /> : <Navigate to="/upload" />}
+            />
+            <Route path="/calendar" element={loggedIn ? <CalendarPage /> : <Navigate to="/" />} />
 
-          <Route
-            path="/profile"
-            element={
-              loggedIn ? (
-                <ProfilePage
-                  userId={userId}
-                  handleLogin={handleLogin}
-                  handleLogout={handleLogout}
-                  userPhoto={userPhoto}
-                  userName={userName}
-                  changeUploaded={changeUploaded}
-                />
-              ) : (
-                <Navigate to="/upload" />
-              )
-            }
-          />
-          <Route
-            path="/upload"
-            element={
-              uploaded ? <Navigate to="/vote" /> : <Upload changeUploaded={changeUploaded} userId={userId} />
-            }
-          />
-          <Route path="/vote" element={uploaded ? <Vote /> : <Navigate to="/upload" />} />
-        </Routes>
-      </BrowserRouter>
+            <Route
+              path="/profile"
+              element={
+                loggedIn ? (
+                  <ProfilePage
+                    userId={userId}
+                    handleLogin={handleLogin}
+                    handleLogout={handleLogout}
+                    userPhoto={userPhoto}
+                    userName={userName}
+                    changedUploaded={changedUploaded}
+                  />
+                ) : (
+                  <Navigate to="/upload" />
+                )
+              }
+            />
+            <Route
+              path="/upload"
+              element={
+                uploaded ? (
+                  <Navigate to="/vote" />
+                ) : (
+                  <Upload changedUploaded={changedUploaded} userId={userId} />
+                )
+              }
+            />
+            <Route path="/vote" element={uploaded ? <Vote /> : <Navigate to="/upload" />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
     </>
   );
 };
