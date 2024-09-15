@@ -164,6 +164,7 @@ router.post("/add-vote", async (req, res) => {
       await oldVotedImage.save();
     }
   }
+
   image.votes += 1;
   await image.save();
   user.votingFor = imageId;
@@ -258,7 +259,7 @@ router.get("/get-images", async (req, res) => {
   }
 });
 
-router.get('/get-winner', async (req, res) => {
+router.get("/get-winner", async (req, res) => {
   try {
     const dateString = req.query.date as string;
     const date = new Date(dateString);
