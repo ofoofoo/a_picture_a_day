@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ProfilePage.css";
 import { Link } from "react-router-dom";
 import {
@@ -15,6 +15,7 @@ interface ProfilePageProps {
   handleLogin: (credentialResponse: CredentialResponse) => void;
   handleLogout: () => void;
   userPhoto?: string;
+  userName?: string;
   changedUploaded: (boolean) => void;
 }
 
@@ -26,25 +27,14 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
   handleLogin,
   handleLogout,
   userPhoto,
+  userName,
   changedUploaded,
 }) => {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files ? event.target.files[0] : null;
-    setSelectedFile(file);
-
-    if (file) {
-      console.log("Uploaded file:", file);
-      // API call logic here
-    }
-  };
-
   return (
     <div className="profile-container">
       <div className="name-section">
-        <div className="username">big shaq</div>
-        <div className="handle">@jbursz</div>
+        <div className="username">{userName}</div>
+        {/* <div className="handle">@jbursz</div> */}
       </div>
 
       <img src={userPhoto} alt="Profile" className="profile-pic" />

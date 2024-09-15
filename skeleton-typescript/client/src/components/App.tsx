@@ -15,6 +15,7 @@ import CalendarPage from "./pages/Calendar";
 
 const App = () => {
   const [userId, setUserId] = useState<string | undefined>(undefined);
+  const [userName, setUserName] = useState<string | undefined>(undefined);
   const [userPhoto, setUserPhoto] = useState<string | undefined>(undefined);
   const [loggedIn, changeLog] = useState(false);
   const isMounted = useRef(false);
@@ -24,6 +25,7 @@ const App = () => {
         // TRhey are registed in the database and currently logged in.
         setUserId(user._id);
         setUserPhoto(user.photoUrl);
+        setUserName(user.name);
         changeLog(true);
       }
     });
@@ -39,6 +41,7 @@ const App = () => {
     post("/api/login", { token: userToken }).then((user) => {
       setUserId(user._id);
       setUserPhoto(user.photoUrl);
+      setUserName(user.name);
       changeLog(true);
     });
   };
@@ -46,6 +49,7 @@ const App = () => {
   const handleLogout = () => {
     setUserId(undefined);
     setUserPhoto(undefined);
+    setUserName(undefined);
     post("/api/logout");
     changeLog(false);
   };
@@ -101,6 +105,7 @@ const App = () => {
                   handleLogin={handleLogin}
                   handleLogout={handleLogout}
                   userPhoto={userPhoto}
+                  userName={userName}
                   changedUploaded={changedUploaded}
                 />
               ) : (

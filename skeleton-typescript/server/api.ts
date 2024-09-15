@@ -280,9 +280,19 @@ router.get("/get-winner", async (req, res) => {
       return res.status(404).send("Image not found.");
     }
 
+    const params = {
+      Bucket: process.env.S3_BUCKET_NAME as string,
+      Key: image.filekey,
+      Expires: 7200,
+    };
+    const signedUrl = s3.getSignedUrl("getObject", params);
+
     res.status(200).json({
       success: true,
-      image,
+      image: {
+        ...image.toObject(),
+        signedUrl,
+      },
     });
   } catch (error) {
     console.error("Failed to retrieve winner:", error);

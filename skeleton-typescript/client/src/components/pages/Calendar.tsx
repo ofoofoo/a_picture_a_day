@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import Calendar, { CalendarProps } from "react-calendar";
 import "./Calendar.css";
+import { startOfDay, endOfDay } from "date-fns";
+
+import { get } from "../../utilities";
 
 const CalendarPage: React.FC = () => {
   const [date, setDate] = useState<Date>(new Date()); // current date
+  const [winnerImage, setWinnerImage] = useState<string | undefined>(undefined);
+  const [userImage, setUserImage] = useState<string | undefined>(undefined);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null); // stores clicked data
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined); // stores clicked data
 
   const onChange: CalendarProps["onChange"] = (newDate, event) => {
     if (newDate instanceof Date) {
@@ -17,12 +22,17 @@ const CalendarPage: React.FC = () => {
 
   const onDateClick: CalendarProps["onClickDay"] = (value, event) => {
     setSelectedDate(value);
-    setIsModalOpen(true);
+    console.log(startOfDay(value));
+    get("/api/get-winner", { date: value })
+      .then((info) => {
+        setWinnerImage(info.image.signedUrl);
+      })
+      .then(() => setIsModalOpen(true));
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setSelectedDate(null);
+    setSelectedDate(undefined);
   };
 
   return (
@@ -38,11 +48,11 @@ const CalendarPage: React.FC = () => {
             <h1>Images for {selectedDate.toDateString()}</h1>
             <div className="image-container">
               <div className="image-wrapper">
-                image 1 here
-                <img src="path-to-image-1" alt="Image 1" />
+                winner
+                <img src={winnerImage} alt="winner image" />
               </div>
               <div className="image-wrapper">
-                iamge 2 here
+                yours
                 <img src="path-to-image-2" alt="Image 2" />
               </div>
             </div>
