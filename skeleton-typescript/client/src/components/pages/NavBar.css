@@ -79,7 +79,10 @@
     margin-right: 4wpx;  /* Adds space between the logo and the text */
     margin-top: 12px;
   }
-  
+
+.gradient1-text:hover{
+    color: #000;
+}
 
 /* body {
   font-family: Inter;

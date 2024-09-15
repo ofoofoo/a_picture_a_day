@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Calendar, { CalendarProps } from "react-calendar";
 import "./Calendar.css";
 import { get } from "../../utilities";
+import { AiTwotoneFrown } from "react-icons/ai";
+
 
 const CalendarPage: React.FC = () => {
   const [date, setDate] = useState<Date>(new Date()); // current date
@@ -50,7 +52,7 @@ const CalendarPage: React.FC = () => {
 
   return (
     <div className="calendar-container">
-      <h1>Previous Images</h1>
+      <h1>Past Images</h1>
       <Calendar onChange={onChange} value={date} onClickDay={onDateClick} />
       <p>Selected Date: {date.toDateString()}</p>
 
@@ -58,7 +60,7 @@ const CalendarPage: React.FC = () => {
       {isModalOpen && selectedDate && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            {prompt !== undefined ? <h1>{prompt}</h1> : <h1>Nobody played :(</h1>}
+            {prompt !== undefined ? <h1>{prompt}</h1> : <h1>Nobody Winner <AiTwotoneFrown /></h1>}
             <div className="image-container">
               <div className="image-wrapper">
                 {winnerImage !== undefined ? (
