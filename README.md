@@ -1,13 +1,12 @@
 # Seen
-Track your day-to-day location patterns at MIT with the [MIT Heat Map](https://mit-heatmap-f60b83158200.herokuapp.com/)!
 
-Made by Abhay Bestrapalli, Orion Foo, Nathan Xiong, and Ram Goel.
+Made by Abhay Bestrapalli, Mason Fang, Orion Foo, and Nathan Xiong.
 
 ![alt text](https://media.discordapp.net/attachments/975839431468650589/1152843721168134285/image.png?width=1846&height=906)
 
 ## How it works
 
-As you walk around MIT's campus, login to [MIT Heat Map](https://mit-heatmap-f60b83158200.herokuapp.com/) and click on your location on the map. Whenever you go to another building, click the new location on the map. We track the time spent at each location and use it to display a heat map of where you spend most of your time on campus. We also display the path of where you've visited throughout the day.
+
 
 ## Features
 
@@ -24,9 +23,8 @@ Our heat map is based on the amount of time spent in a building. The more time b
 ## What we used
 
 We used the following technologies:
-* [Leaflet.js](https://leafletjs.com/) for providing map data, and for adding features to the map. 
-* [Express.js](https://expressjs.com/) and [Node.js](https://nodejs.org/en) 
-* [MongoDB](https://www.mongodb.com/)  and [Mongoose](https://mongoosejs.com/docs/)
+* [Vanta.js](https://leafletjs.com/) for providing smooth and clean animated website backgrounds. 
+* [Node.js](https://nodejs.org/en) 
+* [MongoDB](https://www.mongodb.com/)
 * [React](https://react.dev/)
 * [Google OAuth](https://developers.google.com/identity/protocols/oauth2)
-* [MIT Building Data](https://whereis.mit.edu/)
