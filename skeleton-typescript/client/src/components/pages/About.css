@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.about-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  background-color: transparent;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  align-items: center;
+  text-align: center;
+}
+
+.github-icon {
+  width: 40px; /* Adjust the size of the GitHub icon */
+  margin-top: 20px;
+  transition: transform 0.3s;
+  background-color: transparent;
+}
+
+.github-icon:hover {
+  transform: scale(1.1); /* Slight zoom effect on hover */
+}

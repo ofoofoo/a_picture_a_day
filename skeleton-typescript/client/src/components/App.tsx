@@ -17,6 +17,7 @@ import BIRDS from "vanta/dist/vanta.birds.min";
 import * as THREE from "three";
 import VANTA from "vanta/dist/vanta.net.min";
 import NET from "vanta/dist/vanta.net.min"; // Import the specific Vanta effect
+import About from "./pages/About";
 
 const App = () => {
   const [userId, setUserId] = useState<string | undefined>(undefined);
@@ -71,28 +72,6 @@ const App = () => {
     changeLog(false);
     changeUploaded(false);
   };
-
-  // useEffect(() => {
-  //   // if (!isMounted.current) {
-  //   //   isMounted.current = true;
-  //   //   return;
-  //   // }
-  //   if (userId === undefined) {
-  //     changeLog(false);
-  //     changeUploaded(false);
-  //     return;
-  //   }
-  //   get("/api/userinfo").then((res) => {
-  //     if (res.uploaded) {
-  //       changeUploaded(true);
-  //     } else {
-  //       changeUploaded(false);
-  //     }
-  //   });
-  // }, [loggedIn]);
-  // NOTE:
-  // All the pages need to have the props extended via RouteComponentProps for @reach/router to work properly. Please use the Skeleton as an example.
-
   const [vantaEffect, setVantaEffect] = useState(null);
   const myRef = useRef(null);
   useEffect(() => {
@@ -102,14 +81,13 @@ const App = () => {
           el: myRef.current,
           THREE: THREE,
           color: 0xff3f81,
+          lineColor: 0xbe9292,
           backgroundColor: "black",
           spacing: 18,
         })
       );
     }
-    return () => {
-      // if (vantaEffect) vantaEffect.destroy();
-    };
+    return () => {};
   }, [vantaEffect]);
   return (
     <>
@@ -159,6 +137,7 @@ const App = () => {
             }
           />
           <Route path="/vote" element={uploaded ? <Vote /> : <Navigate to="/upload" />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </BrowserRouter>
     </>
