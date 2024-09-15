@@ -12,7 +12,7 @@ export interface User extends Document {
   name: string;
   googleid: string;
   photoUrl: string;
-  uploaded: string;
+  uploaded: string | null;
   votingFor: string | null;
   _id: string;
 }
