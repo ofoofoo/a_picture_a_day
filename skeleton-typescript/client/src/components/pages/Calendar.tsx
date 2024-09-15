@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Calendar, { CalendarProps } from "react-calendar";
 import "./Calendar.css";
-import { startOfDay } from "date-fns";
 import { get } from "../../utilities";
 
 const CalendarPage: React.FC = () => {
@@ -22,7 +21,6 @@ const CalendarPage: React.FC = () => {
 
   const onDateClick: CalendarProps["onClickDay"] = (value, event) => {
     setSelectedDate(value);
-    console.log(startOfDay(value));
 
     get("/api/get-winner", { date: value })
       .then((info) => {
@@ -71,7 +69,7 @@ const CalendarPage: React.FC = () => {
                 <p className="image-label">Winner</p>
               </div>
               <div className="image-wrapper">
-                {winnerImage !== undefined ? (
+                {userImage !== undefined ? (
                   <img src={userImage} alt="your image" className="image_scaled" />
                 ) : (
                   <p className="missing-image-text">No submission on this date.</p>
