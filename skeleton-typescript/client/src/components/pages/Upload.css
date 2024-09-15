@@ -12,7 +12,7 @@
 
 /* Styling for the prompt box */
 .prompt-box {
-  background-color: #111;
+  background-color: #1c1c1c;
   padding: 20px 40px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
