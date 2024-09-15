@@ -23,9 +23,14 @@ const Vote: React.FC = () => {
       });
       return images;
     };
-    loadImages().then((images) => {
-      setImages(images);
-    });
+    loadImages()
+      .then((images) => {
+        setImages(images);
+      })
+      .then(() => get("/api/userinfo"))
+      .then((info) => {
+        setVotes(info.votingFor === null ? [] : [info.votingFor]);
+      });
   }, []);
 
   // const handleVote = (imageId: number) => {

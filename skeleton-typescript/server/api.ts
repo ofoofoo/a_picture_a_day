@@ -44,17 +44,13 @@ router.get("/userinfo", async (req, res) => {
       return res.status(404).send("User not found.");
     }
 
-    const uploadedImage = ImageModel.findById(user.uploaded);
-
-    const votingForImage = ImageModel.findById(user.votingFor);
-
     console.log("hullo dumbass");
     res.status(200).json({
       success: true,
       _id: user._id,
       name: user.name,
-      uploaded: uploadedImage,
-      votingFor: votingForImage,
+      uploaded: user.uploaded,
+      votingFor: user.votingFor,
     });
   } catch (error) {
     console.error("Failed to retrieve user info:", error);
