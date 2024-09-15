@@ -149,7 +149,7 @@
 }
 
 .react-calendar__tile--now {
-  background: #5f2e08;
+  background: #f39202;
 }
 
 .react-calendar__tile--now:enabled:hover,

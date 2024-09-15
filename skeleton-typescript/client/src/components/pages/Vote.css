@@ -20,3 +20,18 @@ p {
   color: #aaa;
   margin-top: 20px;
 }
+
+.prompt-box {
+  background-color: #1c1c1c;
+  padding: 20px 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+  margin-bottom: 30px;
+}
+
+.prompt-box h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  text-align: center;
+  color: #fff;
+}

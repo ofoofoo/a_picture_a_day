@@ -10,6 +10,21 @@ const MAX_VOTES = 1;
 const Vote: React.FC = () => {
   const [imagestwo, setImages] = useState<{ id: number; url: string; name: string }[]>([]);
   const [votes, setVotes] = useState<number[]>([]);
+  const [prompt, setPrompt] = useState<string | null>(null);
+
+  const fetchPrompt = async () => {
+    try {
+      const response = await fetch("/api/prompt");
+      const result = await response.json();
+      setPrompt(result.prompt);
+    } catch (error) {
+      console.error("Failed to fetch prompt:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchPrompt();
+  }, []);
   let images: { id: number; url: string; name: string }[] = [];
 
   useEffect(() => {
@@ -52,6 +67,10 @@ const Vote: React.FC = () => {
   return (
     <div className="app">
       <h1 className="title">Vote for the best one!</h1>
+
+      <div className="prompt-box">
+        <h3>PROMPT: {prompt || "Loading ..."}</h3>
+      </div>
       {/* <div id="image-gallery"></div> */}
       <ImageList images={imagestwo} votes={votes} onVote={handleVote} maxVotes={MAX_VOTES} />
       {/* <p>{`You can vote for up to ${MAX_VOTES} image.`}</p> */}
