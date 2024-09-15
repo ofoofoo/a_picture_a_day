@@ -6,6 +6,7 @@ import express from "express";
 import auth from "./auth";
 import ImageModel from "./models/Image";
 import UserModel from "./models/User";
+import WinnerModel from "./models/Winner";
 import { startOfDay, endOfDay } from "date-fns";
 dotenv.config({});
 
@@ -173,6 +174,46 @@ router.post("/add-vote", async (req, res) => {
   });
 });
 
+router.get("/get-image", async (req, res) => {
+  try {
+    const userId = req.user?._id;
+    const dateString = req.query.date as string;
+    const date = new Date(dateString);
+
+    if (isNaN(date.getTime())) {
+      return res.status(400).send("Invalid date.");
+    }
+
+    const start = startOfDay(date);
+    const end = endOfDay(date);
+
+    const images = await ImageModel.find({
+      uploadedBy: userId,
+      uploadedAt: {
+        $gte: start,
+        $lt: end,
+      },
+    });
+
+    if (images.length === 0) {
+      return res.status(404).send("No image found.");
+    } else if (images.length > 1) {
+      return res.status(500).send("More than one image found.");
+    }
+
+    const image = images[0];
+    res.status(200).json({
+      success: true,
+      image,
+    });
+  } catch (error) {
+    console.error("Failed to retrieve image:", error);
+    res.status(500).json({
+      success: false,
+    });
+  }
+});
+
 router.get("/get-images", async (req, res) => {
   try {
     const dateString = req.query.date as string;
@@ -211,6 +252,43 @@ router.get("/get-images", async (req, res) => {
     });
   } catch (error) {
     console.error("Failed to retrieve images:", error);
+    res.status(500).json({
+      success: false,
+    });
+  }
+});
+
+router.get('/get-winner', async (req, res) => {
+  try {
+    const dateString = req.query.date as string;
+    const date = new Date(dateString);
+
+    if (isNaN(date.getTime())) {
+      return res.status(400).send("Invalid date.");
+    }
+
+    const start = startOfDay(date);
+    const winner = await WinnerModel.findOne({
+      date: {
+        $eq: start,
+      },
+    });
+
+    if (!winner) {
+      return res.status(404).send("No winner found.");
+    }
+
+    const image = await ImageModel.findById(winner.image);
+    if (!image) {
+      return res.status(404).send("Image not found.");
+    }
+
+    res.status(200).json({
+      success: true,
+      image,
+    });
+  } catch (error) {
+    console.error("Failed to retrieve winner:", error);
     res.status(500).json({
       success: false,
     });
