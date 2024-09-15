@@ -227,25 +227,28 @@
 }
 
 .modal-content .image_scaled {
-    width: 75%;      /* Set width to 50% of its original size */
-    height: auto;    /* Maintain the aspect ratio */
-    max-width: 300px;  /* Ensure it doesn't grow larger than 300px */
+  width: 75%; /* Set width to 50% of its original size */
+  height: auto; /* Maintain the aspect ratio */
+  max-width: 300px; /* Ensure it doesn't grow larger than 300px */
 }
 
 .image-container {
-    display: flex;         /* Use flexbox to display items in a row */
-    justify-content: space-between;  /* Space between images */
-    align-items: center;   /* Align images vertically */
-  }
-  
-  .image-wrapper {
-    flex: 1;               /* Allow images to take equal space */
-    margin: 0 10px;        /* Add some space between the images */
-  }
-  
-  .image_scaled {
-    width: 100%;           /* Make images responsive to the container */
-    height: auto;          /* Maintain aspect ratio */
-    max-width: 300px;      /* Limit the max width */
-  }
-  
+  display: flex; /* Use flexbox to display items in a row */
+  justify-content: space-between; /* Space between images */
+  align-items: center; /* Align images vertically */
+}
+
+.image-wrapper {
+  flex: 1; /* Allow images to take equal space */
+  margin: 0 10px; /* Add some space between the images */
+}
+
+.image_scaled {
+  width: 100%; /* Make images responsive to the container */
+  height: auto; /* Maintain aspect ratio */
+  max-width: 300px; /* Limit the max width */
+}
+
+.missing-image-text {
+  color: black;
+}

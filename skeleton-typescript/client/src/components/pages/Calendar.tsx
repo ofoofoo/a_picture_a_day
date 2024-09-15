@@ -22,12 +22,23 @@ const CalendarPage: React.FC = () => {
   const onDateClick: CalendarProps["onClickDay"] = (value, event) => {
     setSelectedDate(value);
     console.log(startOfDay(value));
-    get("/api/get-winner", { date: value }).then((info) => {
-      setWinnerImage(info.image.signedUrl);
-    });
-    get("/api/get-image", { date: value }).then((info) => {
-      setUserImage(info.image.signedUrl);
-    });
+
+    get("/api/get-winner", { date: value })
+      .then((info) => {
+        setWinnerImage(info.image.signedUrl);
+      })
+      .catch(() => {
+        setWinnerImage(undefined);
+      });
+
+    get("/api/get-image", { date: value })
+      .then((info) => {
+        setUserImage(info.image.signedUrl);
+      })
+      .catch(() => {
+        setUserImage(undefined);
+      });
+
     setIsModalOpen(true);
   };
 
@@ -48,14 +59,22 @@ const CalendarPage: React.FC = () => {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h1>Images for {selectedDate.toDateString()}</h1>
             <div className="image-container">
-            <div className="image-wrapper">
-                <img src={winnerImage} alt="winner image" className="image_scaled" />
+              <div className="image-wrapper">
+                {winnerImage !== undefined ? (
+                  <img src={winnerImage} alt="winner image" className="image_scaled" />
+                ) : (
+                  <p className="missing-image-text">No winner on this date.</p>
+                )}
                 <p className="image-label">Winner</p>
-            </div>
-            <div className="image-wrapper">
-                <img src={userImage} alt="your image" className="image_scaled" />
+              </div>
+              <div className="image-wrapper">
+                {winnerImage !== undefined ? (
+                  <img src={userImage} alt="your image" className="image_scaled" />
+                ) : (
+                  <p className="missing-image-text">No submission on this date.</p>
+                )}
                 <p className="image-label">Your Submission</p>
-            </div>
+              </div>
             </div>
             <div className="bottom-content">
               <p>{selectedDate.toDateString()}</p>
