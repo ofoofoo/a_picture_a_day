@@ -7,6 +7,7 @@
   width: 100%;
   z-index: 100;
   height: 60px;
+  position: relative;
 
   /* background: linear-gradient(
           90deg,  
@@ -73,15 +74,15 @@
 }
 
 .NavBar-logo {
-    width: 75px;   /* Adjust width as needed */
-    height: auto;  /* Maintain aspect ratio */
-    vertical-align: middle;  /* Aligns the logo with the text */
-    margin-right: 4wpx;  /* Adds space between the logo and the text */
-    margin-top: 12px;
-  }
+  width: 75px; /* Adjust width as needed */
+  height: auto; /* Maintain aspect ratio */
+  vertical-align: middle; /* Aligns the logo with the text */
+  margin-right: 4wpx; /* Adds space between the logo and the text */
+  margin-top: 12px;
+}
 
-.gradient1-text:hover{
-    color: #000;
+.gradient1-text:hover {
+  color: #000;
 }
 
 /* body {

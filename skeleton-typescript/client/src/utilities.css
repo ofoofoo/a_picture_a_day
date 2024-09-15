@@ -103,3 +103,14 @@ body,
   overflow: hidden;
   background-color: transparent;
 }
+
+.whole-page {
+  position: fixed; /* Fixes the box relative to the viewport */
+  top: 0; /* Aligns the box to the top of the viewport */
+  left: 0; /* Aligns the box to the left of the viewport */
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  bottom: 0;
+  background-color: transparent; /* Transparent background */
+  z-index: 0 !important; /* Sits behind other elements with higher z-index */
+}

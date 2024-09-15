@@ -112,7 +112,8 @@ const App = () => {
     };
   }, [vantaEffect]);
   return (
-    <div ref={myRef}>
+    <>
+      <div ref={myRef} className="whole-page"></div>
       <BrowserRouter>
         <NavBar
           handleLogin={handleLogin}
@@ -160,7 +161,7 @@ const App = () => {
           <Route path="/vote" element={uploaded ? <Vote /> : <Navigate to="/upload" />} />
         </Routes>
       </BrowserRouter>
-    </div>
+    </>
   );
 };
 

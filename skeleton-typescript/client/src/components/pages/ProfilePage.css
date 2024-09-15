@@ -11,6 +11,7 @@ body {
   z-index: 1 !important;
   height: 100vh;
   margin-top: 10vh;
+  position: relative;
 }
 
 .profile-pic {
