@@ -51,7 +51,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
 
       <div className="streak-counter">
         <FaFire />
-        <span className="streak-text">k-day streak</span>
+        <span className="streak-text"> k-day streak</span>
       </div>
 
       <Link to="/calendar">
@@ -77,14 +77,14 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
         </GoogleOAuthProvider>
       </div>
 
-      <div className="upload">
+      {/* <div className="upload">
         <div className="upload-box">
           <label htmlFor="file-upload" className="custom-file-upload">
             Choose File
           </label>
           <input id="file-upload" type="file" accept="image/*" onChange={handleFileUpload} />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

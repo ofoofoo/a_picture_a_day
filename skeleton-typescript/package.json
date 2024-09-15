@@ -37,6 +37,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "google-auth-library": "^6.1.4",
+    "jsx-runtime": "^1.2.0",
     "jwt-decode": "^3.1.2",
     "mongodb": "^6.9.0",
     "mongoose": "^5.11.11",
