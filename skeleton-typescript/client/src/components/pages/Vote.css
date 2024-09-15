@@ -2,7 +2,7 @@
 .app {
   background-color: transparent;
   color: #fff;
-  min-height: 100vh; /* Allow the container to grow if content overflows */
+  min-height: 50vh; /* Allow the container to grow if content overflows */
   display: flex;
   flex-direction: column;
   /* justify-content: flex-start; Keep items at the bottom */
@@ -11,7 +11,7 @@
   overflow-y: auto;
   /* padding-top: 50px; Space at the top */
   scroll-padding-bottom: 100px;
-  height: 101vh;
+  height: 80vh;
   padding-bottom: 100px;
   padding-top: 100px;
   position: relative;
