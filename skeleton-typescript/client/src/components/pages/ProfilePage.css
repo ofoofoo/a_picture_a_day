@@ -9,6 +9,8 @@ body {
   width: 300px;
   margin: 0 auto;
   z-index: 1 !important;
+  height: 100vh;
+  margin-top: 10vh;
 }
 
 .profile-pic {
